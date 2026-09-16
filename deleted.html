@@ -1,0 +1,435 @@
+<!-- -----Terms & Condition---- -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Terms & Conditions</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================================================
+       GLOBAL RESET
+    ========================================================= */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* body {
+        min-height: 100vh;
+        background: #09090d;
+        color: #d2d2d8;
+        font-family: "Inter", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      } */
+
+      /* =========================================================
+       TERMS & CONDITIONS SECTION
+    ========================================================= */
+
+      .terms-policy-section {
+        width: 100%;
+        min-height: 100vh;
+        padding: 44px 24px 64px;
+        background: #09090d;
+        border-top: 1px solid #292a33;
+        border-bottom: 1px solid #292a33;
+      }
+
+      /* =========================================================
+       HEADER
+    ========================================================= */
+
+      .terms-policy-header {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto 40px;
+        text-align: center;
+      }
+
+      /* Small gold badge */
+
+      .terms-policy-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        min-height: 26px;
+        padding: 4px 14px;
+
+        border: 1px solid #5c4813;
+        border-radius: 999px;
+
+        background: rgba(212, 175, 55, 0.045);
+
+        color: #e0b52f;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.25px;
+        text-transform: uppercase;
+      }
+
+      .terms-policy-badge-icon {
+        width: 13px;
+        height: 13px;
+        display: block;
+        flex-shrink: 0;
+      }
+
+      /* Main heading */
+
+      .terms-policy-title {
+        margin-top: 13px;
+
+        color: #f3f3f5;
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.7px;
+      }
+
+      .terms-policy-title-highlight {
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #f5edcc 50%,
+          #ffc300 100%
+        );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      /* =========================================================
+       TERMS CARD
+    ========================================================= */
+
+      .terms-policy-card {
+        width: 100%;
+        max-width: 896px;
+        margin: 0 auto;
+
+        padding: 29px 31px 28px;
+
+        background: #111118;
+
+        border: 1px solid #30313b;
+        border-radius: 15px;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      /* =========================================================
+       TERMS LIST
+    ========================================================= */
+
+      .terms-policy-list {
+        list-style: none;
+        width: 100%;
+      }
+
+      .terms-policy-item {
+        position: relative;
+
+        display: grid;
+        grid-template-columns: 9px 1fr;
+        column-gap: 12px;
+
+        width: 100%;
+
+        color: #ceced5;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.58;
+        letter-spacing: -0.05px;
+      }
+
+      .terms-policy-item + .terms-policy-item {
+        margin-top: 17px;
+      }
+
+      /* Gold bullet */
+
+      .terms-policy-bullet {
+        width: 8px;
+        height: 8px;
+
+        margin-top: 6px;
+
+        border-radius: 50%;
+        background: #d7b52f;
+
+        box-shadow: 0 0 7px rgba(215, 181, 47, 0.08);
+      }
+
+      .terms-policy-text {
+        display: block;
+      }
+
+      /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+      @media (max-width: 1000px) {
+        .terms-policy-section {
+          padding-top: 40px;
+        }
+
+        .terms-policy-header {
+          margin-bottom: 34px;
+        }
+
+        .terms-policy-card {
+          max-width: 896px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .terms-policy-section {
+          padding: 34px 16px 45px;
+        }
+
+        .terms-policy-header {
+          margin-bottom: 28px;
+        }
+
+        .terms-policy-badge {
+          font-size: 10px;
+          padding: 5px 11px;
+        }
+
+        .terms-policy-title {
+          margin-top: 12px;
+          font-size: 26px;
+          letter-spacing: -0.5px;
+        }
+
+        .terms-policy-card {
+          padding: 24px 20px;
+          border-radius: 13px;
+        }
+
+        .terms-policy-item {
+          grid-template-columns: 8px 1fr;
+          column-gap: 10px;
+
+          font-size: 13px;
+          line-height: 1.6;
+        }
+
+        .terms-policy-item + .terms-policy-item {
+          margin-top: 16px;
+        }
+      }
+
+      @media (max-width: 450px) {
+        .terms-policy-section {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        .terms-policy-title {
+          font-size: 24px;
+        }
+
+        .terms-policy-card {
+          padding: 21px 17px;
+        }
+
+        .terms-policy-item {
+          font-size: 12.5px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================================================
+       TERMS & CONDITIONS
+  ========================================================= -->
+
+    <section class="terms-policy-section">
+      <!-- Header -->
+      <div class="terms-policy-header">
+        <div class="terms-policy-badge">
+          <!-- Document Icon -->
+          <svg
+            class="terms-policy-badge-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 3.5H14.5L18.5 7.5V20.5H7C6.17 20.5 5.5 19.83 5.5 19V5C5.5 4.17 6.17 3.5 7 3.5Z"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linejoin="round"
+            />
+
+            <path
+              d="M14 3.8V8H18.2"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linejoin="round"
+            />
+
+            <path
+              d="M8.5 12H15.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+
+            <path
+              d="M8.5 15.5H15.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <span>Official Policy &amp; Guidelines</span>
+        </div>
+
+        <h1 class="terms-policy-title">
+          Terms
+          <span class="terms-policy-title-highlight">&amp; Conditions</span>
+        </h1>
+      </div>
+
+      <!-- Main Terms Card -->
+      <div class="terms-policy-card">
+        <ul class="terms-policy-list">
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              The 8% Monthly rate under the Perpetual Yield Phase (Period C)
+              applies exclusively to Investor accounts and is calculated on the
+              invested principal amount.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              Networker/Affiliate accounts continue to earn strictly according
+              to their existing plan structure (daily ROI rates and 21-level
+              affiliate commissions); this phase does not alter Networker
+              earnings or rates in any way.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              Investors may withdraw their principal amount at any time, with no
+              lock-in period, subject to standard processing timelines.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              Daily/Monthly ROI earnings are separate from the principal and are
+              credited according to the applicable Period (A, B, or C) rate
+              active at that time.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              All earnings (ROI + affiliate income + achievement rewards) are
+              subject to a maximum income cap: 3x for Investors and 5x for
+              Networkers, calculated on total activation/investment amount.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              Once the income cap is reached, no further ROI, affiliate, or
+              bonus earnings will be credited to that account/package.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              Achievement rewards and affiliate commissions are credited only
+              after all eligibility conditions (active status, direct referral
+              requirements, business volume, etc.) are met.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              The company reserves the right to revise ROI rates, phase periods,
+              or terms with prior notice on the platform.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              All withdrawals are subject to applicable processing fees and
+              timelines as set by the platform.
+            </span>
+          </li>
+
+          <li class="terms-policy-item">
+            <span class="terms-policy-bullet"></span>
+            <span class="terms-policy-text">
+              Users are responsible for ensuring their account and payment
+              details are accurate; the company is not liable for losses due to
+              incorrect information provided by the user.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const termsSection = document.querySelector(".terms-policy-section");
+
+        if (!termsSection) return;
+
+        // Small entrance animation
+        termsSection.style.opacity = "0";
+        termsSection.style.transform = "translateY(8px)";
+        termsSection.style.transition =
+          "opacity 0.45s ease, transform 0.45s ease";
+
+        requestAnimationFrame(() => {
+          termsSection.style.opacity = "1";
+          termsSection.style.transform = "translateY(0)";
+        });
+      });
+    </script>
+  </body>
+</html>
