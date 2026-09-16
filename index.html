@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>World of Forex</title>
+    <title>SolveX</title>
+    <link rel="shortcut icon" href="Photos/logo-1.png" type="image/x-icon" />
     <style>
       /* ---------- RESET & BASE ---------- */
       * {
@@ -18,18 +19,27 @@
         color: #fff;
       }
 
-      /* ---------- NAVBAR SHELL ---------- */
+      /* ---------- NAVBAR SHELL (initial transparent over hero) ---------- */
       .site-header {
         width: 100%;
         height: 67px;
-        background: #0a0b10;
+        background: rgba(0, 0, 0, 0.83); /* start transparent */
         border-top: 1px solid #25262c;
-        border-bottom: 1px solid #646600;
+        border-bottom: 1px solid #646600ab;
         display: flex;
         align-items: center;
         justify-content: center;
         position: fixed;
         z-index: 1000;
+        transition:
+          background 0.25s ease,
+          border-color 0.2s ease;
+      }
+
+      /* scrolled state – solid black */
+      .site-header.scrolled {
+        background: #000000; /* fully black on scroll */
+        border-bottom-color: #3a3b3f;
       }
 
       .header-container {
@@ -284,9 +294,9 @@
 
   <body>
     <!-- =========================
-       SITE HEADER
-  ========================= -->
-    <header class="site-header">
+         SITE HEADER (initial transparent)
+    ========================= -->
+    <header class="site-header" id="siteHeader">
       <div class="header-container">
         <!-- BRAND -->
         <a href="#" class="brand">
@@ -309,7 +319,7 @@
 
         <!-- RIGHT ACTIONS -->
         <div class="action-group">
-          <a href="#" class="portal-badge">Investor Portal</a>
+          <!-- <a href="#" class="portal-badge">Investor Portal</a> -->
           <a href="#" class="login-link">Login</a>
           <a href="#" class="cta-start">Start Now</a>
         </div>
@@ -340,7 +350,28 @@
       </div>
     </header>
 
+    <!-- =========================
+         HERO SECTION (background behind transparent header)
+    ========================= -->
+    <!-- <section class="hero">
+      <div class="hero-content">
+        <h1>SolveX</h1>
+        <p>Next‑gen trading intelligence. Same header, smarter scroll.</p>
+      </div>
+    </section> -->
+
+    <!-- =========================
+         SCROLL SPACE (to demonstrate header change)
+    ========================= -->
+    <!-- <div class="placeholder-spacer">
+      <span>▼ scroll down — header turns solid black ▼</span>
+    </div> -->
+
+    <!-- =========================
+         SCRIPT (menu + scroll effect)
+    ========================= -->
     <script>
+      // ----- MOBILE MENU TOGGLE (unchanged) -----
       const menuToggle = document.getElementById("menuToggle");
       const mobileMenu = document.getElementById("mobileMenu");
 
@@ -362,6 +393,29 @@
           lines[2].style.transform = "";
         }
       });
+
+      // ----- SCROLL DETECTION: change header to black after scroll -----
+      const header = document.getElementById("siteHeader");
+      const heroSection = document.querySelector(".hero");
+
+      function updateHeaderBackground() {
+        // If the user has scrolled past the hero (or more than 50px),
+        // add the .scrolled class to make header black.
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      }
+
+      // Initial check on page load (in case the page is loaded scrolled)
+      updateHeaderBackground();
+
+      // Listen to scroll events
+      window.addEventListener("scroll", updateHeaderBackground);
+
+      // Optional: Also update on resize (not necessary but harmless)
+      window.addEventListener("resize", updateHeaderBackground);
     </script>
   </body>
 </html>
@@ -372,508 +426,712 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Institutional Group Trading Plan — 21 Levels</title>
+    <title>Institutional Market Execution · Black & Gold</title>
 
-    <!-- Google Font & Font Awesome (same as original) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Caveat:wght@500;600&display=swap"
       rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
 
     <style>
-      /* =========================================================
-       GLOBAL RESET — same as original
-    ========================================================= */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
-      html {
-        scroll-behavior: smooth;
+      html,
+      body {
+        width: 100%;
+        height: 100%;
       }
 
       body {
-        background: #09090b;
-        color: #f4f4f5;
-        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-        overflow-x: hidden;
+        font-family: "Barlow Condensed", sans-serif;
+        background: #000;
       }
 
-      button,
-      a {
-        font-family: inherit;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      /* =========================================================
-       HERO SECTION — now with a premium background image
-       (background image added via CSS; sits behind gradient overlay)
-    ========================================================= */
-      .institutional-hero {
+      /* ------ HERO — pure black + gold accents ------ */
+      .hero {
         position: relative;
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 50px 24px 180px;
-        /* background image + dark gradient overlay for readability */
-        background-image: url("https://images.unsplash.com/photo-1513061379709-ef0cd1695189?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2l0eSUyMG5pZ2h0fGVufDB8fDB8fHww");
-        /* ^ premium abstract trading / city dark image */
-        background-size: cover;
-        background-position: center 30%;
-        background-repeat: no-repeat;
-        background-blend-mode: overlay;
-        background-color: #09090b; /* fallback */
+        min-height: 100vh;
         overflow: hidden;
-        border-bottom: 1px solid #ffd7004f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000000;
       }
 
-      /* Dark gradient overlay to keep text legible and match dark/gold theme */
-      .institutional-hero::after {
+      /* ------ deep black base with subtle gold radial glow ------ */
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: #000000;
+        z-index: 0;
+      }
+
+      /* rich golden ambient glow behind content */
+      .hero-bg::before {
         content: "";
         position: absolute;
         inset: 0;
         background:
           radial-gradient(
-            circle at 50% 16%,
-            rgb(212 169 42 / 30%) 0%,
-            rgb(212 169 42 / 6%) 25%,
-            transparent 45%
+            ellipse 80% 60% at 50% 40%,
+            rgba(212, 175, 55, 0.18) 0%,
+            rgba(184, 134, 44, 0.08) 35%,
+            transparent 70%
           ),
-          linear-gradient(
-            180deg,
-            rgba(9, 9, 11, 0.852) 0%,
-            rgba(9, 9, 11, 0.71) 55%,
-            #09090bd5 100%
+          radial-gradient(
+            ellipse 60% 50% at 20% 80%,
+            rgba(212, 175, 55, 0.06) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 40% at 85% 20%,
+            rgba(212, 175, 55, 0.05) 0%,
+            transparent 60%
           );
-        z-index: 1;
-        pointer-events: none;
+        z-index: 0;
+        animation: glowPulse 8s ease-in-out infinite alternate;
       }
 
-      /* subtle top border line (original) */
-      .institutional-hero::before {
+      @keyframes glowPulse {
+        0% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* subtle grain / texture overlay for depth */
+      .hero-bg::after {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: rgba(100, 100, 110, 0.45);
-        z-index: 3;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.5;
       }
 
-      /* =========================================================
-       HERO CONTENT — same structural styles
-    ========================================================= */
-      .institutional-hero-content {
+      /* ------ elegant golden ring accent ------ */
+      .glow-ring {
+        position: absolute;
+        width: 65vmax;
+        height: 65vmax;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        border: 1px solid rgba(212, 175, 55, 0.08);
+        background: radial-gradient(
+          circle,
+          rgba(212, 175, 55, 0.04) 0%,
+          transparent 65%
+        );
+        z-index: 1;
+        pointer-events: none;
+        animation: ringPulse 7s ease-in-out infinite alternate;
+      }
+
+      .glow-ring::after {
+        content: "";
+        position: absolute;
+        inset: 12%;
+        border-radius: 50%;
+        border: 1px solid rgba(212, 175, 55, 0.05);
+      }
+
+      @keyframes ringPulse {
+        0% {
+          opacity: 0.4;
+          transform: translate(-50%, -50%) scale(0.92);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.08);
+        }
+      }
+
+      /* ------ CONTENT ------ */
+      .hero-content {
         position: relative;
-        z-index: 2; /* above overlay */
+        z-index: 5;
         width: 100%;
-        max-width: 950px;
+        text-align: center;
+        color: #fff;
         display: flex;
         flex-direction: column;
         align-items: center;
-        top: 68px;
-        text-align: center;
+        padding: 70px 24px 70px;
+        max-width: 1100px;
+        margin: 0 auto;
       }
 
-      /* =========================================================
-       LOGO — same
-    ========================================================= */
-      .institutional-brand-logo {
+      /* ------ Logo image — golden drop shadow ------ */
+      .logo-image {
         display: block;
-        width: 115px;
+        max-width: 130px;
+        width: 100%;
         height: auto;
-        object-fit: contain;
-        margin-bottom: 22px;
-        filter: drop-shadow(0 0 18px rgba(231, 185, 54, 0.12))
-          drop-shadow(0 0 35px rgba(231, 185, 54, 0.05));
+        margin-bottom: 20px;
+        filter: drop-shadow(0 4px 24px rgba(212, 175, 55, 0.35));
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.3s;
       }
 
-      /* =========================================================
-       TOP LABEL — updated copy (eyebrow)
-    ========================================================= */
-      .institutional-plan-label {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 9px;
-        min-height: 26px;
-        padding: 4px 18px;
-        border: 1px solid rgba(207, 160, 25, 0.38);
-        border-radius: 999px;
-        background: rgba(207, 160, 25, 0.07);
-        color: #dcb43c;
-        font-size: 10px;
-        font-weight: 600;
+      /* ------ "Welcome to" — Caveat, golden ------ */
+      .come-say {
+        font-family: "Caveat", cursive;
+        font-size: clamp(40px, 5vw, 62px);
+        font-weight: 500;
         line-height: 1;
-        letter-spacing: 1.5px;
-        box-shadow: inset 0 0 18px rgba(212, 169, 42, 0.025);
+        margin-bottom: 14px;
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+        animation: fadeUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.5s;
+        letter-spacing: 1px;
+        color: #d4af37;
+        text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
       }
 
-      .institutional-plan-label i {
-        color: #dcae25;
-        font-size: 13px;
+      /* ------ main headline — INSTITUTIONAL MARKET EXECUTION ------ */
+      .hello {
+        position: relative;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(44px, 8.5vw, 98px);
+        line-height: 0.88;
+        font-weight: 700;
+        letter-spacing: -2px;
+        color: #ffffff;
+        margin-left: -2px;
+        opacity: 0;
+        transform: perspective(900px) translateZ(-600px) scale(0.45);
+        filter: blur(18px);
+        animation: helloReveal 2s cubic-bezier(0.16, 0.9, 0.24, 1) forwards 0.2s;
+        text-shadow:
+          0 0 80px rgba(212, 175, 55, 0.25),
+          0 4px 30px rgba(0, 0, 0, 0.8);
+        will-change: transform, filter, opacity;
+        max-width: 1000px;
+        word-break: break-word;
       }
 
-      /* =========================================================
-       MAIN HEADLINE — updated copy, better line breaks
-    ========================================================= */
-      .institutional-hero-title {
-        margin-top: 34px;
-        max-width: 980px;
-        font-size: clamp(48px, 5.2vw, 70px);
-        line-height: 1;
-        letter-spacing: 0.5px;
-      }
-
-      .institutional-title-white {
-        display: block;
-        color: #f1f1f1;
-      }
-
-      .institutional-title-gold {
-        display: block;
-        margin-top: 14px;
-        color: #dfbb4800; /* transparent but gradient fallback */
+      /* golden gradient text fill via overlay */
+      .hello::before {
+        content: "INSTITUTIONAL MARKET EXECUTION";
+        position: absolute;
+        inset: 0;
         background: linear-gradient(
-          135deg,
-          #d4af37 0%,
-          #f5edcc 50%,
-          #ffc300 100%
+          180deg,
+          #ffffff 0%,
+          #ffffff 20%,
+          #f5e6b8 35%,
+          #d4af37 55%,
+          #b8862c 80%,
+          #8b6914 100%
         );
         -webkit-background-clip: text;
         background-clip: text;
+        -webkit-text-fill-color: #ffffffa1;
+        color: #00000000;
+        pointer-events: none;
+      }
+
+      /* subtle shimmer on headline */
+      .hello::after {
+        content: "INSTITUTIONAL MARKET EXECUTION";
+        position: absolute;
+        inset: 0;
+        color: transparent;
+        background: repeating-linear-gradient(
+          105deg,
+          rgba(255, 235, 160, 0) 0px,
+          rgba(255, 235, 160, 0) 8px,
+          rgba(255, 245, 200, 0.25) 9px,
+          rgba(255, 235, 160, 0) 10px,
+          rgba(255, 235, 160, 0) 20px
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        opacity: 0.4;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+        letter-spacing: -2px;
+        animation: shimmer 6s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%,
+        100% {
+          transform: translateX(-4px);
+          opacity: 0.2;
+        }
+        50% {
+          transform: translateX(4px);
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes helloReveal {
+        0% {
+          opacity: 0;
+          transform: perspective(900px) translateZ(-700px) scale(0.35);
+          filter: blur(24px);
+        }
+        30% {
+          opacity: 0.7;
+          transform: perspective(900px) translateZ(-200px) scale(0.75);
+          filter: blur(8px);
+        }
+        65% {
+          opacity: 0.95;
+          transform: perspective(900px) translateZ(30px) scale(1.05);
+          filter: blur(1px);
+        }
+        100% {
+          opacity: 1;
+          transform: perspective(900px) translateZ(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      /* ------ gold divider line ------ */
+      .divider {
+        width: 80px;
+        height: 2px;
+        margin: 36px auto 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #d4af37,
+          #f5e6b8,
+          #d4af37,
+          transparent
+        );
+        opacity: 0;
+        animation: fadeUp 1s ease forwards 1.3s;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+      }
+
+      /* ------ subheading — golden gradient ------ */
+      .location {
+        margin-top: 28px;
+        font-size: 23px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(25px);
+        animation: fadeUp 1s ease forwards 1.5s;
+        background: linear-gradient(90deg, #d4af37, #f5e6b8, #d4af37);
+        -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+        max-width: 800px;
+        line-height: 1.5;
       }
 
-      /* =========================================================
-       DESCRIPTION — updated copy
-    ========================================================= */
-      .institutional-hero-description {
-        max-width: 820px;
-        margin-top: 35px;
-        color: #d6d6d9;
+      /* ------ supporting paragraph ------ */
+      .support-text {
+        margin-top: 18px;
+        font-size: clamp(16px, 1.3vw, 20px);
+        font-weight: 300;
+        letter-spacing: 1px;
+        color: #a89870;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 1s ease forwards 1.8s;
+        max-width: 700px;
+        line-height: 1.6;
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      }
+
+      /* ------ button group ------ */
+      .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 16px 20px;
+        margin-top: 42px;
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+        animation: dateReveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards 2.1s;
+      }
+
+      .btn {
+        display: inline-block;
+        font-family: "Barlow Condensed", sans-serif;
         font-size: 18px;
-        line-height: 29px;
-        font-weight: 400;
-        letter-spacing: 0.5px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 15px 42px;
+        border-radius: 60px;
+        transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: pointer;
+        border: 1.5px solid transparent;
+        text-shadow: none;
+        background: transparent;
+        position: relative;
+        overflow: hidden;
       }
 
-      .institutional-hero-description strong {
-        color: #f1f1f1;
-        font-weight: 800;
+      /* primary button — gold fill */
+      .btn-primary {
+        background: linear-gradient(145deg, #d4af37, #b8862c);
+        border-color: #f5e6b8;
+        color: #0a0800;
+        font-weight: 600;
+        box-shadow:
+          0 0 30px rgba(212, 175, 55, 0.35),
+          0 8px 30px rgba(0, 0, 0, 0.4);
       }
 
-      /* =========================================================
-       CTA BUTTON GROUP
-    ========================================================= */
-      .institutional-action-group {
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent 40%,
+          rgba(255, 245, 200, 0.3) 50%,
+          transparent 60%
+        );
+        transform: translateX(-100%) rotate(45deg);
+        transition: transform 0.6s ease;
+      }
+
+      .btn-primary:hover::after {
+        transform: translateX(100%) rotate(45deg);
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(145deg, #e8c84a, #c99a32);
+        border-color: #fff8e0;
+        box-shadow:
+          0 0 50px rgba(212, 175, 55, 0.55),
+          0 8px 40px rgba(0, 0, 0, 0.5);
+        transform: translateY(-3px) scale(1.02);
+      }
+
+      /* outline button — gold border */
+      .btn-outline {
+        border-color: rgba(212, 175, 55, 0.5);
+        color: #f5e6b8;
+        background: rgba(212, 175, 55, 0.05);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+      }
+
+      .btn-outline:hover {
+        background: rgba(212, 175, 55, 0.12);
+        border-color: #d4af37;
+        box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        transform: translateY(-3px) scale(1.02);
+        color: #fff8e0;
+      }
+
+      /* ghost / text button */
+      .btn-ghost {
+        border-color: transparent;
+        color: #a89870;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+        text-decoration-color: rgba(212, 175, 55, 0.3);
+        padding: 15px 20px;
+        letter-spacing: 1.5px;
+      }
+
+      .btn-ghost:hover {
+        color: #f5e6b8;
+        text-decoration-color: #d4af37;
+        transform: translateY(-3px) scale(1.02);
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      }
+
+      @keyframes dateReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* ------ slider dots (hidden by default) ------ */
+      .slider-dots {
+        position: absolute;
+        z-index: 10;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 17px;
-        margin-top: 46px;
+        gap: 18px;
       }
 
-      /* =========================================================
-       COMMON BUTTON
-    ========================================================= */
-      .institutional-action {
-        min-width: 230px;
-        height: 53px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        padding: 0 28px;
-        border-radius: 13px;
-        font-size: 16px;
-        font-weight: 700;
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(212, 175, 55, 0.15);
         cursor: pointer;
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease,
-          background 0.25s ease,
-          border-color 0.25s ease;
+        transition: all 0.35s ease;
+        border: 1px solid rgba(212, 175, 55, 0.15);
       }
 
-      .institutional-action:hover {
-        transform: translateY(-2px);
+      .dot.active {
+        background: #d4af37;
+        transform: scale(1.15);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        border-color: rgba(245, 230, 184, 0.5);
       }
 
-      /* PRIMARY BUTTON */
-      .institutional-action-primary {
-        border: 1px solid #d7ab25;
-        background: linear-gradient(
-          135deg,
-          #d9ae2c 0%,
-          #e0b933 50%,
-          #d3a51e 100%
-        );
-        color: #090909;
-        box-shadow: 0 7px 25px rgba(218, 173, 40, 0.08);
+      .dot:hover {
+        transform: scale(1.2);
+        background: rgba(212, 175, 55, 0.5);
       }
 
-      .institutional-action-primary:hover {
-        background: linear-gradient(
-          135deg,
-          #e4bb3e 0%,
-          #e8c44e 50%,
-          #dcb12d 100%
-        );
-        box-shadow: 0 10px 32px rgba(218, 173, 40, 0.16);
+      /* ------ page loader ------ */
+      .page-loader {
+        position: fixed;
+        inset: 0;
+        background: #000000;
+        z-index: 100;
+        pointer-events: none;
+        animation: loaderFade 1s ease forwards 0.4s;
       }
 
-      .institutional-action-primary i {
-        font-size: 15px;
-      }
-
-      /* SECONDARY GOLD BUTTON */
-      .institutional-action-market {
-        border: 1px solid rgba(197, 151, 31, 0.52);
-        background: rgba(12, 12, 14, 0.75);
-        color: #e3bf51;
-      }
-
-      .institutional-action-market:hover {
-        background: rgba(205, 158, 34, 0.07);
-        border-color: rgba(220, 174, 46, 0.8);
-        box-shadow: 0 8px 30px rgba(209, 166, 45, 0.05);
-      }
-
-      .institutional-action-market i {
-        color: #dcb439;
-        font-size: 15px;
-      }
-
-      /* THIRD BUTTON */
-      .institutional-action-packages {
-        min-width: 228px;
-        border: 1px solid #292a31;
-        background: rgba(10, 10, 13, 0.65);
-        color: #e0e0e3;
-      }
-
-      .institutional-action-packages:hover {
-        border-color: #414149;
-        background: rgba(255, 255, 255, 0.025);
-      }
-
-      /* =========================================================
-       RESPONSIVE TABLET
-    ========================================================= */
-      @media (max-width: 900px) {
-        .institutional-hero {
-          padding: 50px 24px 70px;
-          background-position: center 25%;
-        }
-
-        .institutional-hero-title {
-          font-size: clamp(46px, 7vw, 62px);
-        }
-
-        .institutional-hero-description {
-          max-width: 760px;
-          font-size: 18px;
-        }
-
-        .institutional-action-group {
-          gap: 12px;
-        }
-
-        .institutional-action {
-          min-width: 210px;
+      @keyframes loaderFade {
+        to {
+          opacity: 0;
+          visibility: hidden;
         }
       }
 
-      /* =========================================================
-       RESPONSIVE MOBILE
-    ========================================================= */
-      @media (max-width: 700px) {
-        .institutional-hero {
-          min-height: 100svh;
-          padding: 35px 18px 55px;
-          background-position: center 20%;
+      /* ------ responsive ------ */
+      @media (max-width: 768px) {
+        .hero {
+          min-height: 100vh;
         }
-
-        .institutional-hero-content {
-          max-width: 100%;
+        .logo-image {
+          max-width: 100px;
+          margin-bottom: 14px;
         }
-
-        .institutional-brand-logo {
-          width: 190px;
-          margin-bottom: 25px;
+        .come-say {
+          font-size: 36px;
+          margin-bottom: 10px;
         }
-
-        .institutional-plan-label {
-          padding: 7px 13px;
-          font-size: 11px;
-          white-space: nowrap;
+        .hello {
+          font-size: clamp(38px, 10vw, 70px);
+          letter-spacing: -1px;
         }
-
-        .institutional-hero-title {
-          margin-top: 27px;
-          font-size: clamp(39px, 11vw, 54px);
-          line-height: 1.05;
-          letter-spacing: -2px;
+        .hello::after,
+        .hello::before {
+          letter-spacing: -1px;
         }
-
-        .institutional-title-gold {
-          margin-top: 11px;
-        }
-
-        .institutional-hero-description {
+        .divider {
           margin-top: 28px;
-          font-size: 16px;
-          line-height: 1.65;
+          width: 60px;
         }
-
-        .institutional-action-group {
-          width: 100%;
-          flex-direction: column;
-          margin-top: 34px;
+        .location {
+          font-size: 15px;
+          letter-spacing: 2px;
+          margin-top: 22px;
         }
-
-        .institutional-action {
-          width: 100%;
-          max-width: 390px;
-          min-width: 0;
-          height: 57px;
-          font-size: 16px;
+        .support-text {
+          font-size: 15px;
+          letter-spacing: 0.5px;
+          line-height: 1.5;
+        }
+        .button-group {
+          gap: 12px 14px;
+          margin-top: 32px;
+        }
+        .btn {
+          font-size: 15px;
+          padding: 13px 30px;
+          letter-spacing: 1.5px;
+        }
+        .btn-ghost {
+          padding: 13px 14px;
         }
       }
 
-      /* =========================================================
-       SMALL MOBILE
-    ========================================================= */
-      @media (max-width: 420px) {
-        .institutional-hero {
-          padding-left: 15px;
-          padding-right: 15px;
+      @media (max-width: 480px) {
+        .hello {
+          font-size: 34px;
+          letter-spacing: 0px;
         }
+        .hello::after,
+        .hello::before {
+          letter-spacing: 0px;
+        }
+        .logo-image {
+          max-width: 80px;
+          margin-bottom: 10px;
+        }
+        .come-say {
+          font-size: 30px;
+        }
+        .location {
+          font-size: 12px;
+          letter-spacing: 1px;
+        }
+        .support-text {
+          font-size: 13.5px;
+          letter-spacing: 0.3px;
+        }
+        .btn {
+          font-size: 13px;
+          padding: 11px 24px;
+        }
+        .button-group {
+          gap: 10px 10px;
+        }
+        .glow-ring {
+          width: 100vmax;
+          height: 100vmax;
+        }
+      }
 
-        .institutional-brand-logo {
-          width: 175px;
-        }
-
-        .institutional-plan-label {
-          font-size: 10px;
-        }
-
-        .institutional-hero-title {
-          font-size: 38px;
-        }
-
-        .institutional-hero-description {
-          font-size: 15px;
-        }
+      ::-webkit-scrollbar {
+        display: none;
       }
     </style>
   </head>
-
   <body>
-    <!-- =======================================================
-       INSTITUTIONAL HERO — with background image
-    ======================================================== -->
-    <section class="institutional-hero">
-      <div class="institutional-hero-content">
-        <!-- LOGO (same) -->
+    <section class="hero">
+      <!-- black + gold ambient background -->
+      <div class="hero-bg"></div>
+      <!-- golden ring accent -->
+      <div class="glow-ring"></div>
+
+      <!-- loader -->
+      <div class="page-loader"></div>
+
+      <!-- main content -->
+      <div class="hero-content">
         <img
-          class="institutional-brand-logo"
+          class="logo-image"
           src="Photos/logo-1.png"
-          alt="World of Forex"
+          alt="Institutional Market Execution logo"
+          loading="lazy"
         />
+        <!-- <div class="come-say">Welcome to</div> -->
+        <div class="hello">INSTITUTIONAL MARKET EXECUTION</div>
 
-        <!-- PLAN LABEL — updated to match "Cleaner & Stronger" version -->
-        <div class="institutional-plan-label">
-          <i class="fa-solid fa-bolt"></i>
-          <span>INSTITUTIONAL MARKET EXECUTION</span>
-        </div>
+        <div class="divider"></div>
 
-        <!-- HEADLINE — using "Trade With Structure." + "Move With the Market." -->
-        <h1 class="institutional-hero-title">
-          <span class="institutional-title-white"> Trade With Structure. </span>
-          <span class="institutional-title-gold"> Move With the Market. </span>
-        </h1>
-
-        <!-- DESCRIPTION — refreshed, avoiding repetitive "cap" emphasis -->
-        <p class="institutional-hero-description">
+        <div class="location">Trade With Structure. Move With the Market.</div>
+        <div class="support-text">
           Access a structured trading ecosystem built around live market
           execution, transparent participation, and a technology-driven approach
           to global financial markets.
-        </p>
-
-        <!-- ACTION BUTTONS — copy updated per recommendation -->
-        <div class="institutional-action-group">
-          <!-- Primary: Start Now → -->
-          <a
-            href="#invest"
-            class="institutional-action institutional-action-primary"
-          >
-            <span>Start Now</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-
-          <!-- Secondary: View Live Charts -->
-          <a
-            href="#charts"
-            class="institutional-action institutional-action-market"
-          >
-            <i class="fa-solid fa-wave-square"></i>
-            <span>View Live Charts</span>
-          </a>
-
-          <!-- Third: Explore the Platform -->
-          <a
-            href="#packages"
-            class="institutional-action institutional-action-packages"
-          >
-            <span>Explore the Platform</span>
-          </a>
         </div>
+
+        <div class="button-group">
+          <a href="#" class="btn btn-primary">Start Now</a>
+          <a href="#" class="btn btn-outline">Services</a>
+          <!-- <a href="#" class="btn btn-ghost">Explore the Platform</a> -->
+        </div>
+      </div>
+
+      <!-- slider dots (hidden) -->
+      <div class="slider-dots" style="display: none">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
       </div>
     </section>
 
-    <!-- =======================================================
-       OPTIONAL JAVASCRIPT — smooth scroll (same as original)
-    ======================================================== -->
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const actionButtons = document.querySelectorAll(
-          ".institutional-action",
-        );
+      (function () {
+        "use strict";
 
-        actionButtons.forEach((button) => {
-          button.addEventListener("click", (event) => {
-            const targetSelector = button.getAttribute("href");
+        const dots = document.querySelectorAll(".dot");
+        dots.forEach((dot) => {
+          dot.addEventListener("click", function (e) {
+            e.stopPropagation();
+            dots.forEach((d) => d.classList.remove("active"));
+            this.classList.add("active");
+            if (navigator.vibrate) navigator.vibrate(10);
+          });
+        });
 
-            if (targetSelector && targetSelector.startsWith("#")) {
-              const targetElement = document.querySelector(targetSelector);
+        window.addEventListener("load", function () {
+          const hello = document.querySelector(".hello");
+          if (!hello) return;
+          hello.style.animation = "none";
+          void hello.offsetHeight;
+          hello.style.animation =
+            "helloReveal 2s cubic-bezier(0.16, 0.9, 0.24, 1) forwards 0.2s";
+        });
 
-              if (targetElement) {
-                event.preventDefault();
+        // subtle parallax on glow ring only (background is pure black)
+        const hero = document.querySelector(".hero");
+        const ring = document.querySelector(".glow-ring");
+        let isParallax = true;
 
-                targetElement.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }
+        hero.addEventListener("mousemove", function (e) {
+          if (!isParallax) return;
+          const xFactor = (e.clientX / window.innerWidth - 0.5) * 20;
+          const yFactor = (e.clientY / window.innerHeight - 0.5) * 12;
+          ring.style.transition = "transform 0.15s ease-out";
+          ring.style.transform = `translate(calc(-50% + ${xFactor}px), calc(-50% + ${yFactor}px)) scale(1)`;
+        });
+
+        hero.addEventListener("mouseleave", function () {
+          ring.style.transition =
+            "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)";
+          ring.style.transform = "translate(-50%, -50%) scale(1)";
+        });
+
+        if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+          isParallax = false;
+        }
+
+        dots.forEach((dot) => {
+          dot.setAttribute("role", "button");
+          dot.setAttribute("tabindex", "0");
+          dot.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              dots.forEach((d) => d.classList.remove("active"));
+              this.classList.add("active");
             }
           });
         });
-      });
+
+        setTimeout(() => {
+          const hello = document.querySelector(".hello");
+          if (hello && getComputedStyle(hello).opacity === "0") {
+            hello.style.opacity = "1";
+            hello.style.transform = "perspective(900px) translateZ(0) scale(1)";
+            hello.style.filter = "blur(0)";
+          }
+        }, 3000);
+      })();
     </script>
   </body>
 </html>
@@ -981,7 +1239,7 @@
      ================================================================ -->
 <section class="hiw-section" id="hiw-section">
   <div class="hiw-container">
-    <h2 class="hiw-title">How Secret Candle AI Helps You Trade Smarter</h2>
+    <h2 class="hiw-title">Our Structured Trading System</h2>
 
     <div class="hiw-grid" id="hiw-grid">
       <!-- Card 1 – Blue -->
@@ -994,16 +1252,21 @@
                 d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
               />
             </svg>
-            <span class="hiw-tag">Analyze</span>
+
+            <span class="hiw-tag">ROI STRUCTURE</span>
+
             <h3>
-              Read the Market<br />
-              with AI
+              Structured ROI<br />
+              Date Periods
             </h3>
+
             <p>
-              AI combines Multi-Timeframe Analysis, Support & Resistance, and
-              Institutional Order Blocks to reveal the true market structure.
+              Our trading schedule is organized across distinct periods, with
+              defined rates and structured earning phases designed around the
+              Solvex trading system.
             </p>
           </div>
+
           <img class="hiw-image" src="Photos/pic-2.webp" alt="" />
         </div>
       </div>
@@ -1018,13 +1281,21 @@
                 d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm12,152h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24a28,28,0,0,1,0,56Z"
               />
             </svg>
-            <span class="hiw-tag">Detect</span>
-            <h3>Spot High <br />Probability Setups</h3>
+
+            <span class="hiw-tag">AFFILIATE DISTRIBUTION</span>
+
+            <h3>
+              21-Level Affiliate<br />
+              Distribution
+            </h3>
+
             <p>
-              Secret Candle AI identifies powerful candle formations and filters
-              only the highest-quality trading opportunities.
+              A structured 21-level commission system with predefined
+              distribution rates across each level and an organized framework
+              for affiliate earnings.
             </p>
           </div>
+
           <img class="hiw-image" src="Photos/pic-4.webp" alt="" />
         </div>
       </div>
@@ -1039,13 +1310,21 @@
                 d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"
               />
             </svg>
-            <span class="hiw-tag">Signal</span>
-            <h3>Trade with AI Confidence</h3>
+
+            <span class="hiw-tag">LEVEL ACCESS</span>
+
+            <h3>
+              Structured Level<br />
+              Opening Rules
+            </h3>
+
             <p>
-              Get AI Market Bias with smart Buy & Sell signals backed by
-              multiple market confirmations.
+              Progress through the affiliate structure based on active direct
+              referrals, with additional levels becoming available as referral
+              requirements are met.
             </p>
           </div>
+
           <img class="hiw-image" src="Photos/pic-3.webp" alt="" />
         </div>
       </div>
@@ -1081,13 +1360,20 @@
                 stroke-width="24"
               />
             </svg>
-            <span class="hiw-tag">Execute</span>
-            <h3>Execute Like a Professional</h3>
+
+            <span class="hiw-tag">INCOME CAP</span>
+
+            <h3>
+              Maximum Income<br />
+              Cap
+            </h3>
+
             <p>
-              Trade confidently using the Trade Quality Filter, disciplined risk
-              management, and AI-powered confirmations.
+              Defined earning limits apply across ROI and level income, with
+              separate earning caps for Investor and Networker accounts.
             </p>
           </div>
+
           <img class="hiw-image" src="Photos/pic-11.webp" alt="" />
         </div>
       </div>
@@ -1574,7 +1860,7 @@
         border: 1px solid rgba(207, 164, 45, 0.35);
         background: rgba(49, 39, 13, 0.35);
         color: #dfb83f;
-        font-size: 10px;
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.3px;
         white-space: nowrap;
@@ -1598,7 +1884,7 @@
       .algorithmic-liquidity-heading {
         max-width: 820px;
         margin-top: 28px;
-        font-size: clamp(30px, 3.8vw, 44px);
+        font-size: clamp(31px, 3.9vw, 46px);
         line-height: 1.1;
         font-weight: 800;
         letter-spacing: -1.8px;
@@ -1628,7 +1914,7 @@
         max-width: 800px;
         margin-top: 24px;
         color: #c8c9cf;
-        font-size: 16px;
+        font-size: 17px;
         line-height: 1.65;
         font-weight: 400;
         letter-spacing: -0.2px;
@@ -1680,7 +1966,7 @@
       }
 
       .benefit-number {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 700;
         letter-spacing: 0.5px;
         color: #5b5e6b;
@@ -1731,7 +2017,7 @@
     ========================================================= */
       .benefit-title {
         color: #f0f0f2;
-        font-size: 15px;
+        font-size: 16px;
         line-height: 1.35;
         font-weight: 700;
         letter-spacing: -0.1px;
@@ -1740,7 +2026,7 @@
 
       .benefit-description {
         color: #9397a2;
-        font-size: 12.5px;
+        font-size: 13.5px;
         line-height: 1.6;
         font-weight: 400;
         margin: 0;
@@ -1778,7 +2064,7 @@
           #d0a31c 100%
         );
         color: #080808;
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 600;
         cursor: pointer;
         transition:
@@ -1811,7 +2097,7 @@
         border: 1px solid #262832;
         background: rgba(10, 10, 14, 0.7);
         color: #cecfd4;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 500;
         cursor: pointer;
         transition:
@@ -1836,11 +2122,11 @@
         }
 
         .benefit-title {
-          font-size: 14px;
+          font-size: 15px;
         }
 
         .benefit-description {
-          font-size: 11.5px;
+          font-size: 12.5px;
         }
 
         .benefit-header {
@@ -1857,13 +2143,13 @@
         }
 
         .algorithmic-liquidity-heading {
-          font-size: clamp(26px, 5vw, 34px);
+          font-size: clamp(27px, 5.1vw, 36px);
           letter-spacing: -1px;
           margin-top: 22px;
         }
 
         .algorithmic-liquidity-description {
-          font-size: 13.5px;
+          font-size: 14.5px;
           margin-top: 20px;
         }
 
@@ -1898,11 +2184,11 @@
         }
 
         .benefit-title {
-          font-size: 14px;
+          font-size: 15px;
         }
 
         .benefit-description {
-          font-size: 12px;
+          font-size: 13px;
         }
 
         .algorithmic-action-row {
@@ -1917,7 +2203,7 @@
           width: 100%;
           max-width: 340px;
           height: 46px;
-          font-size: 12.5px;
+          font-size: 13.5px;
         }
 
         .algorithmic-primary-button svg {
@@ -1931,7 +2217,7 @@
     ========================================================= */
       @media (max-width: 400px) {
         .algorithmic-liquidity-heading {
-          font-size: 24px;
+          font-size: 25px;
           letter-spacing: -0.7px;
         }
 
@@ -1947,11 +2233,11 @@
         }
 
         .benefit-title {
-          font-size: 13px;
+          font-size: 14px;
         }
 
         .benefit-description {
-          font-size: 11px;
+          font-size: 12px;
         }
 
         .benefit-column {
@@ -1984,31 +2270,33 @@
             <path d="m8.4 15.6-3.5 3.5" />
             <circle cx="12" cy="12" r="3" />
           </svg>
-          <span>INSTITUTIONAL-GRADE INFRASTRUCTURE</span>
+
+          <span>STRUCTURED TRADING SYSTEM</span>
         </div>
 
         <!-- HEADING -->
         <h1 class="algorithmic-liquidity-heading">
-          <span class="algorithmic-heading-white"
-            >Algorithmic Trading &amp;</span
-          >
-          <span class="algorithmic-heading-gold">Liquidity Intelligence</span>
+          <span class="algorithmic-heading-white">
+            Structured Trading &amp;
+          </span>
+
+          <span class="algorithmic-heading-gold"> Income Framework </span>
         </h1>
 
         <!-- DESCRIPTION -->
         <p class="algorithmic-liquidity-description">
-          Every dollar committed to the Solvex Trading Pool is deployed across
-          institutional cross-exchange arbitrage, automated liquidity
-          provisioning, and systematic quantitative algorithms — producing
-          stable, predictable daily yield.
+          Solvex combines structured ROI periods, a multi-level affiliate
+          distribution system, and clearly defined earning limits into one
+          organized framework for Investors and Networkers.
         </p>
 
-        <!-- INSTITUTIONAL PANEL (3 columns with dividers) -->
+        <!-- INSTITUTIONAL PANEL -->
         <div class="institutional-panel">
-          <!-- column 1 -->
+          <!-- COLUMN 1 -->
           <div class="benefit-column">
             <div class="benefit-header">
               <span class="benefit-number">01</span>
+
               <div class="benefit-icon-refined">
                 <svg
                   viewBox="0 0 24 24"
@@ -2025,21 +2313,23 @@
                 </svg>
               </div>
             </div>
-            <h2 class="benefit-title">
-              Automated Stop-Loss &amp; Capital Preservation
-            </h2>
+
+            <h2 class="benefit-title">Structured ROI Date Periods</h2>
+
             <p class="benefit-description">
-              Strict max-drawdown rules ensure pool principal is shielded
-              against extreme market volatility.
+              The trading schedule is organized across distinct periods,
+              including the High Growth Phase, Consolidation Phase, and
+              Perpetual Yield Phase, with defined rates for each period.
             </p>
           </div>
 
           <div class="panel-divider"></div>
 
-          <!-- column 2 -->
+          <!-- COLUMN 2 -->
           <div class="benefit-column">
             <div class="benefit-header">
               <span class="benefit-number">02</span>
+
               <div class="benefit-icon-refined icon-gold">
                 <svg
                   viewBox="0 0 24 24"
@@ -2053,19 +2343,23 @@
                 </svg>
               </div>
             </div>
-            <h2 class="benefit-title">Multi-Asset Cross Hedging</h2>
+
+            <h2 class="benefit-title">21-Level Affiliate Distribution</h2>
+
             <p class="benefit-description">
-              Strategies span Spot Crypto, Perpetuals, Spot Gold (XAU/USD), and
-              Global Macro FX pairs.
+              A predefined commission structure distributed across 21 levels,
+              with higher levels becoming available through active direct
+              referrals.
             </p>
           </div>
 
           <div class="panel-divider"></div>
 
-          <!-- column 3 -->
+          <!-- COLUMN 3 -->
           <div class="benefit-column">
             <div class="benefit-header">
               <span class="benefit-number">03</span>
+
               <div class="benefit-icon-refined icon-blue">
                 <svg
                   viewBox="0 0 24 24"
@@ -2080,18 +2374,22 @@
                 </svg>
               </div>
             </div>
-            <h2 class="benefit-title">Automated Daily ROI Crediting</h2>
+
+            <h2 class="benefit-title">Maximum Income Cap</h2>
+
             <p class="benefit-description">
-              Yields generated by trading desks are automatically credited daily
-              to your member wallet at midnight.
+              Clearly defined earning limits apply to Investor and Networker
+              accounts, with ROI and level income subject to the applicable
+              account cap.
             </p>
           </div>
         </div>
 
-        <!-- CTA BUTTONS (single bottom action bar) -->
+        <!-- CTA BUTTONS -->
         <div class="algorithmic-action-row">
           <a href="#trading-pool" class="algorithmic-primary-button">
-            <span>Join Trading Pool</span>
+            <span>Explore Packages</span>
+
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -2104,9 +2402,10 @@
               <path d="m13 6 6 6-6 6" />
             </svg>
           </a>
-          <a href="#market-feeds" class="algorithmic-secondary-button"
-            >View Live Market Feeds</a
-          >
+
+          <a href="#market-feeds" class="algorithmic-secondary-button">
+            View Trading Structure
+          </a>
         </div>
       </div>
     </section>
@@ -2821,7 +3120,7 @@
 
       .premium-badge {
         display: inline-block;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         letter-spacing: 2px;
         font-weight: 700;
         color: #e8c95a;
@@ -2839,7 +3138,7 @@
       }
 
       .gf-premium-heading h2 {
-        font-size: 42px;
+        font-size: 40px;
         font-weight: 800;
         letter-spacing: -0.02em;
         margin-bottom: 18px;
@@ -2873,7 +3172,7 @@
       }
 
       .gf-premium-heading p {
-        font-size: 18px;
+        font-size: 17px;
         line-height: 1.5;
         color: #a1a1aa;
         max-width: 680px;
@@ -2969,7 +3268,7 @@
         right: 20px;
         background: linear-gradient(135deg, #d4af37, #f5e56b);
         color: #000000;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         font-weight: 800;
         padding: 5px 14px;
         border-radius: 50px;
@@ -3013,7 +3312,7 @@
 
       /* CARD TITLE – white on black */
       .gf-premium-card h3 {
-        font-size: 1.45rem;
+        font-size: 1.35rem;
         font-weight: 700;
         letter-spacing: -0.01em;
         color: #ffffff;
@@ -3023,7 +3322,7 @@
 
       /* CARD TEXT – muted grey */
       .gf-premium-card p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         line-height: 1.55;
         color: #a1a1aa;
         font-weight: 400;
@@ -3034,7 +3333,7 @@
         margin-top: 16px;
         display: flex;
         gap: 16px;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         color: #9ca3af;
         padding-top: 12px;
         border-top: 1px solid rgba(212, 175, 55, 0.15);
@@ -3060,7 +3359,7 @@
         margin-top: 18px;
         color: #d4af37;
         text-decoration: none;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: 600;
         opacity: 0;
         transform: translateY(10px);
@@ -3131,10 +3430,10 @@
           gap: 24px;
         }
         .gf-premium-heading h2 {
-          font-size: 34px;
+          font-size: 32px;
         }
         .gf-premium-heading p {
-          font-size: 16px;
+          font-size: 15px;
         }
       }
 
@@ -3153,10 +3452,10 @@
           padding: 50px 20px;
         }
         .gf-premium-heading h2 {
-          font-size: 28px;
+          font-size: 26px;
         }
         .premium-badge {
-          font-size: 0.7rem;
+          font-size: 0.65rem;
           padding: 4px 12px;
         }
         .gf-premium-grid {
@@ -3176,7 +3475,7 @@
           height: 24px;
         }
         .gf-premium-card h3 {
-          font-size: 1.3rem;
+          font-size: 1.2rem;
         }
         .card-stats {
           gap: 8px;
@@ -3197,17 +3496,19 @@
     <section id="gf-premium-includes">
       <div class="gf-premium-container">
         <div class="gf-premium-heading">
-          <span class="premium-badge">✦ PREMIUM FEATURES ✦</span>
+          <span class="premium-badge">✦ SOLVEX SYSTEM ✦</span>
+
           <h2>What's included in <span>SolveX</span>?</h2>
+
           <p>
-            Everything you need to learn and understand Trading with Educational
-            Guidance, Structured Systems, and Premium Market insights from
-            SolveX, Operated Under Riya Consultancy
+            A structured trading and income system combining defined ROI
+            periods, multi-level affiliate distribution, level-based access, and
+            clearly defined earning limits.
           </p>
         </div>
 
         <div class="gf-premium-grid">
-          <!-- card 1 - Precision Trading -->
+          <!-- CARD 1 - Structured ROI -->
           <div class="gf-premium-card">
             <div class="gf-card-icon">
               <svg
@@ -3227,23 +3528,25 @@
                 <path d="M8.4 15.6L4.93 19.07" stroke="#b4943b" />
               </svg>
             </div>
-            <h3>Precision Trading</h3>
+
+            <h3>Structured ROI Date Periods</h3>
+
             <p>
-              Stop chasing small pips. Capture 600–1000+ pip moves with
-              institutional-grade smart money concepts.
+              A defined ROI framework organized across High Growth,
+              Consolidation, and Perpetual Yield periods with structured rates
+              for each phase.
             </p>
+
             <div class="card-stats">
-              <span>600-1000+ pips</span>
-              <span>Smart Money</span>
+              <span>Defined Periods</span>
+              <span>Structured ROI</span>
             </div>
-            <a href="https://t.me/+f0-g1L7fg5s5OTZl" class="card-link"
-              >Know More</a
-            >
+
+            <a href="#trading-plan" class="card-link">Know More</a>
           </div>
 
-          <!-- card 2 - High Accuracy Signals (FEATURED) -->
+          <!-- CARD 2 - 21 Level Affiliate -->
           <div class="gf-premium-card featured">
-            <!-- <div class="card-badge">⭐ MOST POPULAR</div> -->
             <div class="gf-card-icon">
               <svg
                 viewBox="0 0 24 24"
@@ -3272,21 +3575,23 @@
                 />
               </svg>
             </div>
-            <h3>High Accuracy Signals</h3>
+
+            <h3>21-Level Affiliate Distribution</h3>
+
             <p>
-              Professionally curated signals with precise entries, stop-loss,
-              targets, and disciplined risk-management rules.
+              Access a structured 21-level affiliate distribution system with
+              predefined commission rates across the applicable levels.
             </p>
+
             <div class="card-stats">
-              <span>92% accuracy rate</span>
-              <span>1500+ active traders</span>
+              <span>21 Levels</span>
+              <span>Commission Structure</span>
             </div>
-            <a href="https://t.me/+f0-g1L7fg5s5OTZl" class="card-link"
-              >Know More</a
-            >
+
+            <a href="#affiliate-plan" class="card-link">Know More</a>
           </div>
 
-          <!-- card 3 - Complete Trading Course -->
+          <!-- CARD 3 - Level Opening -->
           <div class="gf-premium-card">
             <div class="gf-card-icon">
               <svg
@@ -3308,21 +3613,24 @@
                 <path d="M8 11h8" stroke="#b4943b" stroke-linecap="round" />
               </svg>
             </div>
-            <h3>Complete Trading Course</h3>
+
+            <h3>Structured Level Opening Rules</h3>
+
             <p>
-              Learn forex, gold, indices, and stocks from basics to advanced
-              strategies with live sessions and mentorship.
+              Progress through the affiliate structure according to defined
+              direct-referral requirements and unlock additional levels within
+              the system.
             </p>
+
             <div class="card-stats">
-              <span>12+ modules</span>
-              <span>Live sessions</span>
+              <span>Level Access</span>
+              <span>Direct Referrals</span>
             </div>
-            <a href="https://t.me/+f0-g1L7fg5s5OTZl" class="card-link"
-              >Know More</a
-            >
+
+            <a href="#affiliate-plan" class="card-link">Know More</a>
           </div>
 
-          <!-- card 4 - Risk Management System -->
+          <!-- CARD 4 - Investor Cap -->
           <div class="gf-premium-card">
             <div class="gf-card-icon">
               <svg
@@ -3345,21 +3653,23 @@
                 />
               </svg>
             </div>
-            <h3>Risk Management System</h3>
+
+            <h3>Investor Earning Limit</h3>
+
             <p>
-              Capital-protection-first risk management to reduce drawdowns and
-              achieve consistent long-term profitability.
+              Investor earnings are subject to a defined income cap, providing a
+              clear framework for ROI accumulation within the trading plan.
             </p>
+
             <div class="card-stats">
-              <span>Max 2% risk</span>
-              <span>1:3 RR ratio</span>
+              <span>Investor</span>
+              <span>Defined Cap</span>
             </div>
-            <a href="https://t.me/+f0-g1L7fg5s5OTZl" class="card-link"
-              >Know More</a
-            >
+
+            <a href="#trading-plan" class="card-link">Know More</a>
           </div>
 
-          <!-- card 5 - 1:1 VIP Support -->
+          <!-- CARD 5 - Networker Cap -->
           <div class="gf-premium-card">
             <div class="gf-card-icon">
               <svg
@@ -3392,21 +3702,23 @@
                 />
               </svg>
             </div>
-            <h3>1:1 VIP Support</h3>
+
+            <h3>Networker Earning Limit</h3>
+
             <p>
-              Dedicated one-on-one VIP assistance with fast responses,
-              personalized guidance, and priority support.
+              Networker earnings from the affiliate structure operate within a
+              defined income cap based on the applicable distribution levels.
             </p>
+
             <div class="card-stats">
-              <span>24/7 Priority</span>
-              <span>Direct chat</span>
+              <span>Networker</span>
+              <span>Defined Cap</span>
             </div>
-            <a href="https://t.me/+f0-g1L7fg5s5OTZl" class="card-link"
-              >Know More</a
-            >
+
+            <a href="#affiliate-plan" class="card-link">Know More</a>
           </div>
 
-          <!-- card 6 - Weekly Market Outlook -->
+          <!-- CARD 6 - Trading Plan -->
           <div class="gf-premium-card">
             <div class="gf-card-icon">
               <svg
@@ -3450,18 +3762,21 @@
                 />
               </svg>
             </div>
-            <h3>Weekly Market Outlook</h3>
+
+            <h3>Complete Trading Plan</h3>
+
             <p>
-              Weekly professional analysis covering trends, key levels,
-              sentiment, and high-probability trade setups.
+              Access the complete Solvex framework covering investment packages,
+              ROI periods, affiliate distribution, level rules, and applicable
+              earning caps.
             </p>
+
             <div class="card-stats">
-              <span>5+ assets</span>
-              <span>Key levels</span>
+              <span>Trading Plan</span>
+              <span>Full Structure</span>
             </div>
-            <a href="https://t.me/+f0-g1L7fg5s5OTZl" class="card-link"
-              >Know More</a
-            >
+
+            <a href="#trading-plan" class="card-link">Know More</a>
           </div>
         </div>
       </div>
@@ -5893,31 +6208,33 @@
     <section class="affiliate-distribution-section">
       <div class="affiliate-distribution-container">
         <!-- =====================================================
-           EYEBROW
-      ====================================================== -->
+       EYEBROW
+    ====================================================== -->
         <div class="affiliate-eyebrow">
           <span class="affiliate-eyebrow-line"></span>
-          <span class="affiliate-eyebrow-text">Grow Together</span>
+          <span class="affiliate-eyebrow-text">Build Your Network</span>
           <span class="affiliate-eyebrow-line"></span>
         </div>
 
         <!-- =====================================================
-           HEADER
-      ====================================================== -->
+       HEADER
+    ====================================================== -->
         <header class="affiliate-distribution-header">
           <h1 class="affiliate-distribution-title">
             21-Level
             <span class="affiliate-title-gold"> Affiliate Distribution </span>
           </h1>
+
           <p class="affiliate-distribution-subtitle">
-            Total 80% level commission pool distributed across 21 generations.
-            Unlocking is strictly unlocked by active direct referrals.
+            An 80% total level commission pool distributed across 21
+            generations, with higher levels progressively unlocked through
+            active direct referrals.
           </p>
         </header>
 
         <!-- =====================================================
-           TWO CARDS
-      ====================================================== -->
+       TWO CARDS
+    ====================================================== -->
         <div class="affiliate-information-grid">
           <!-- LEFT CARD – COMMISSION RATES -->
           <article class="affiliate-distribution-card affiliate-card-left">
@@ -5937,12 +6254,14 @@
                   <path d="m4 17 8 4 8-4" />
                 </svg>
               </div>
+
               <div class="affiliate-card-header-text">
                 <h2 class="affiliate-card-title">
                   Level Commission Rates (80% Total)
                 </h2>
+
                 <p class="affiliate-card-subtitle">
-                  Predefined commission structure across 21 levels
+                  Defined commission allocation across all 21 levels
                 </p>
               </div>
             </div>
@@ -5955,35 +6274,43 @@
                     <th>Commission Rate</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 1</td>
                     <td class="affiliate-data-value">25.0%</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 2</td>
                     <td class="affiliate-data-value">15.0%</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 3</td>
                     <td class="affiliate-data-value">10.0%</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 4</td>
                     <td class="affiliate-data-value">5.0%</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 5</td>
                     <td class="affiliate-data-value">5.0%</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 6–10</td>
                     <td class="affiliate-data-value">2.0% each (10%)</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 11–20</td>
                     <td class="affiliate-data-value">0.9% each (9%)</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">Level 21</td>
                     <td class="affiliate-data-value">1.0%</td>
@@ -6006,10 +6333,11 @@
                   d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z"
                 />
               </svg>
-              <span
-                >L1–L5 carry the highest incentive weights (25%, 15%, 10%, 5%,
-                5% = 60%).</span
-              >
+
+              <span>
+                Levels 1–5 represent the highest incentive allocation,
+                accounting for a combined 60% of the total commission pool.
+              </span>
             </div>
           </article>
 
@@ -6032,10 +6360,12 @@
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
+
               <div class="affiliate-card-header-text">
                 <h2 class="affiliate-card-title">Level Opening Rules</h2>
+
                 <p class="affiliate-card-subtitle">
-                  Unlock higher levels through active direct referrals
+                  Unlock additional levels through active direct referrals
                 </p>
               </div>
             </div>
@@ -6048,43 +6378,53 @@
                     <th>Levels Unlocked</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">1 Direct Referral</td>
                     <td class="affiliate-data-value">2 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">2 Direct Referrals</td>
                     <td class="affiliate-data-value">4 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">3 Direct Referrals</td>
                     <td class="affiliate-data-value">6 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">4 Direct Referrals</td>
                     <td class="affiliate-data-value">8 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">5 Direct Referrals</td>
                     <td class="affiliate-data-value">10 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">6 Direct Referrals</td>
                     <td class="affiliate-data-value">12 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">7 Direct Referrals</td>
                     <td class="affiliate-data-value">14 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">8 Direct Referrals</td>
                     <td class="affiliate-data-value">16 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">9 Direct Referrals</td>
                     <td class="affiliate-data-value">18 Levels Unlocked</td>
                   </tr>
+
                   <tr class="affiliate-data-row">
                     <td class="affiliate-data-label">10+ Direct Referrals</td>
                     <td class="affiliate-data-value">
@@ -6109,20 +6449,23 @@
                 <line x1="12" y1="16" x2="12" y2="12" />
                 <line x1="12" y1="8" x2="12.01" y2="8" />
               </svg>
-              <span
-                >10 direct referrals unlock all 21 generations across your
-                entire organization.</span
-              >
+
+              <span>
+                10 direct referrals provide access to all 21 generations across
+                the full organization.
+              </span>
             </div>
           </article>
         </div>
 
         <!-- =====================================================
-           FOOTER LINE
-      ====================================================== -->
+       FOOTER LINE
+    ====================================================== -->
         <div class="affiliate-footer-line">
           <span class="affiliate-footer-rule"></span>
-          <span>People · Opportunity · Long‑Term Growth</span>
+
+          <span> Structure · Opportunity · Long-Term Growth </span>
+
           <span class="affiliate-footer-rule"></span>
         </div>
       </div>
@@ -6138,1097 +6481,1105 @@
   </body>
 </html>
 
-<!-- ----- income Cap ---- -->
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Maximum Income Cap</title>
-
-    <!-- Inter -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-
-    <style>
-      /* =========================================================
-       GLOBAL
-    ========================================================= */
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      /* body {
-        min-height: 100vh;
-        background: #09090d;
-        color: #ffffff;
-        font-family: "Inter", Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-      } */
-
-      /* =========================================================
-       MAXIMUM INCOME CAP SECTION
-    ========================================================= */
-
-      .income-cap-section {
-        width: 100%;
-        min-height: 748px;
-
-        padding: 113px 24px 110px;
-
-        background: #09090d;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      /* =========================================================
-       SECTION HEADER
-    ========================================================= */
-
-      .income-cap-header {
-        width: 100%;
-        max-width: 1250px;
-
-        margin: 0 auto 41px;
-
-        text-align: center;
-      }
-
-      .income-cap-title {
-        margin: 0;
-
-        color: #f7f7f8;
-
-        font-size: 30px;
-        font-weight: 800;
-        line-height: 1.2;
-        letter-spacing: -0.9px;
-      }
-
-      .income-cap-title-highlight {
-        background: linear-gradient(
-          135deg,
-          #d4af37 0%,
-          #f5edcc 50%,
-          #ffc300 100%
-        );
-
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-      }
-
-      .income-cap-description {
-        max-width: 1240px;
-
-        margin: 11px auto 0;
-
-        color: #8ca7c6;
-
-        font-size: 13.5px;
-        font-weight: 400;
-        line-height: 1.45;
-        letter-spacing: 0;
-
-        text-align: center;
-      }
-
-      /* =========================================================
-       CAP CARDS WRAPPER
-    ========================================================= */
-
-      .income-cap-cards {
-        width: 100%;
-        max-width: 768px;
-
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 16px;
-
-        margin: 0 auto;
-      }
-
-      /* =========================================================
-       INDIVIDUAL CAP CARD
-    ========================================================= */
-
-      .income-cap-card {
-        min-height: 401px;
-
-        padding: 31px 32px 32px;
-
-        background: #101016;
-
-        border: 1px solid #705919;
-        border-radius: 15px;
-
-        box-shadow: 0 18px 28px rgba(0, 0, 0, 0.15);
-
-        transition:
-          transform 0.25s ease,
-          border-color 0.25s ease,
-          box-shadow 0.25s ease;
-      }
-
-      .income-cap-card:hover {
-        transform: translateY(-3px);
-
-        border-color: #927321;
-
-        box-shadow: 0 22px 35px rgba(0, 0, 0, 0.24);
-      }
-
-      /* =========================================================
-       CARD TOP ROW
-    ========================================================= */
-
-      .income-cap-card-header {
-        width: 100%;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        gap: 14px;
-      }
-
-      .income-cap-card-label {
-        color: #d9b42e;
-
-        font-size: 12px;
-        font-weight: 800;
-        line-height: 1.2;
-
-        letter-spacing: 0.1px;
-        text-transform: uppercase;
-      }
-
-      .income-cap-badge {
-        flex-shrink: 0;
-
-        min-width: 73px;
-        height: 25px;
-
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        padding: 0 12px;
-
-        border-radius: 999px;
-
-        background: #d8b12e;
-
-        color: #101016;
-
-        font-size: 11px;
-        font-weight: 800;
-        line-height: 1;
-        text-transform: uppercase;
-      }
-
-      /* =========================================================
-       CARD TITLE
-    ========================================================= */
-
-      .income-cap-card-title {
-        margin-top: 18px;
-
-        color: #f7f7f8;
-
-        font-size: 25px;
-        font-weight: 800;
-        line-height: 1.2;
-
-        letter-spacing: -0.55px;
-      }
-
-      /* =========================================================
-       CARD DESCRIPTION
-    ========================================================= */
-
-      .income-cap-card-description {
-        margin-top: 11px;
-
-        color: #c6c6ce;
-
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 1.6;
-
-        letter-spacing: -0.1px;
-      }
-
-      /* =========================================================
-       EXAMPLE BOXES
-    ========================================================= */
-
-      .income-cap-examples {
-        width: 100%;
-
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 16px;
-
-        margin-top: 25px;
-      }
-
-      .income-cap-example {
-        min-height: 94px;
-
-        padding: 15px 15px 13px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        background: #0c0c12;
-
-        border: 1px solid #272832;
-        border-radius: 11px;
-      }
-
-      .income-cap-example-investment {
-        color: #f0f0f2;
-
-        font-size: 12.5px;
-        font-weight: 800;
-        line-height: 1.35;
-      }
-
-      .income-cap-example-result {
-        margin-top: 3px;
-
-        color: #d9b52e;
-
-        font-size: 14px;
-        font-weight: 800;
-        line-height: 1.45;
-      }
-
-      /* =========================================================
-       RESPONSIVE
-    ========================================================= */
-
-      @media (max-width: 850px) {
-        .income-cap-section {
-          min-height: auto;
-          padding: 80px 20px;
-        }
-
-        .income-cap-cards {
-          max-width: 768px;
-        }
-
-        .income-cap-title {
-          font-size: 28px;
-        }
-      }
-
-      @media (max-width: 700px) {
-        .income-cap-section {
-          padding: 65px 16px;
-        }
-
-        .income-cap-header {
-          margin-bottom: 32px;
-        }
-
-        .income-cap-title {
-          font-size: 26px;
-        }
-
-        .income-cap-description {
-          font-size: 13px;
-        }
-
-        .income-cap-cards {
-          grid-template-columns: 1fr;
-          max-width: 450px;
-        }
-
-        .income-cap-card {
-          min-height: auto;
-          padding: 27px 25px 28px;
-        }
-      }
-
-      @media (max-width: 430px) {
-        .income-cap-section {
-          padding: 55px 12px;
-        }
-
-        .income-cap-title {
-          font-size: 24px;
-        }
-
-        .income-cap-description {
-          font-size: 12.5px;
-        }
-
-        .income-cap-card {
-          padding: 24px 20px 25px;
-          border-radius: 13px;
-        }
-
-        .income-cap-card-label {
-          font-size: 10.5px;
-        }
-
-        .income-cap-badge {
-          min-width: 68px;
-          height: 24px;
-          font-size: 10px;
-        }
-
-        .income-cap-card-title {
-          font-size: 22px;
-        }
-
-        .income-cap-card-description {
-          font-size: 13px;
-        }
-
-        .income-cap-examples {
-          gap: 10px;
-        }
-
-        .income-cap-example {
-          padding: 13px 12px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- =========================================================
-       MAXIMUM INCOME CAP
-  ========================================================= -->
-
-    <section class="income-cap-section">
-      <!-- Header -->
-      <header class="income-cap-header">
-        <h1 class="income-cap-title">
-          Maximum
-          <span class="income-cap-title-highlight"> Income Cap </span>
-        </h1>
-
-        <p class="income-cap-description">
-          Cap applies to the sum of ROI + Level Income (totalEarned). Investors
-          are capped at 3× their investment, while Networkers have a 5× cap.
-          Achievement rewards do not count toward cap.
-        </p>
-      </header>
-
-      <!-- Cards -->
-      <div class="income-cap-cards">
-        <!-- =====================================================
-           INVESTOR CARD
-      ====================================================== -->
-
-        <article class="income-cap-card">
-          <div class="income-cap-card-header">
-            <span class="income-cap-card-label"> Investor Earning Limit </span>
-
-            <span class="income-cap-badge"> 3X Cap </span>
-          </div>
-
-          <h2 class="income-cap-card-title">300% Total Return Cap</h2>
-
-          <p class="income-cap-card-description">
-            Investor accounts earn up to 300% (3 × Total Invested) in cumulative
-            ROI earnings. Once the 3X threshold is reached, principal can be
-            withdrawn or reinvested to continue earning.
-          </p>
-
-          <div class="income-cap-examples">
-            <div class="income-cap-example">
-              <span class="income-cap-example-investment">
-                $1,000 Investment
-              </span>
-
-              <span class="income-cap-example-result">
-                → $3,000<br />
-                Maximum Cap
-              </span>
-            </div>
-
-            <div class="income-cap-example">
-              <span class="income-cap-example-investment">
-                $5,000 Investment
-              </span>
-
-              <span class="income-cap-example-result">
-                → $15,000<br />
-                Maximum Cap
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- =====================================================
-           NETWORKER CARD
-      ====================================================== -->
-
-        <article class="income-cap-card">
-          <div class="income-cap-card-header">
-            <span class="income-cap-card-label"> Networker Earning Limit </span>
-
-            <span class="income-cap-badge"> 5X Cap </span>
-          </div>
-
-          <h2 class="income-cap-card-title">500% Total Return Cap</h2>
-
-          <p class="income-cap-card-description">
-            Networker/Affiliate accounts earn up to 500% (5 × Total Invested) in
-            cumulative earnings across ROI distributions and referral level
-            commissions. Once the 5X threshold is reached, simply reinvest or
-            add new capital to continue earning.
-          </p>
-
-          <div class="income-cap-examples">
-            <div class="income-cap-example">
-              <span class="income-cap-example-investment">
-                $1,000 Investment
-              </span>
-
-              <span class="income-cap-example-result">
-                → $5,000<br />
-                Maximum Cap
-              </span>
-            </div>
-
-            <div class="income-cap-example">
-              <span class="income-cap-example-investment">
-                $5,000 Investment
-              </span>
-
-              <span class="income-cap-example-result">
-                → $25,000<br />
-                Maximum Cap
-              </span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- =========================================================
-       JAVASCRIPT
-  ========================================================= -->
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const incomeCapSection = document.querySelector(".income-cap-section");
-
-        const incomeCapCards = document.querySelectorAll(".income-cap-card");
-
-        if (!incomeCapSection) return;
-
-        /* Initial state */
-
-        incomeCapSection.style.opacity = "0";
-        incomeCapSection.style.transform = "translateY(8px)";
-        incomeCapSection.style.transition =
-          "opacity 0.5s ease, transform 0.5s ease";
-
-        /* Reveal */
-
-        requestAnimationFrame(() => {
-          incomeCapSection.style.opacity = "1";
-          incomeCapSection.style.transform = "translateY(0)";
-        });
-
-        /* Card interaction */
-
-        incomeCapCards.forEach((card) => {
-          card.addEventListener("mouseenter", () => {
-            card.style.transform = "translateY(-3px)";
-          });
-
-          card.addEventListener("mouseleave", () => {
-            card.style.transform = "translateY(0)";
-          });
-        });
-      });
-    </script>
-  </body>
-</html>
-
 <!-- ------ reward ------ -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Fixed Achievement Cash Rewards</title>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
     <style>
       /* =========================================================
-       GLOBAL RESET
+       GLOBAL RESET & VARIABLES
     ========================================================= */
-
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
+      :root {
+        --achievement-bg: #030405;
+        --achievement-card: #08090b;
+        --achievement-border: #272c34;
+        --achievement-gold: #e2b83f;
+        --achievement-gold-light: #fff0a8;
+        --achievement-teal: #00e2a4;
+        --achievement-muted: #9aafc7;
+        --achievement-white: #f5f7fa;
+        --achievement-panel-bg: #08090b;
+        --achievement-panel-border: rgba(218, 175, 50, 0.7);
+        --achievement-card-gradient: linear-gradient(145deg, #0a0b0f, #07080a);
+        --achievement-gold-gradient: linear-gradient(
+          135deg,
+          #d4aa38,
+          #fff0a8,
+          #e0b83e
+        );
+      }
+
       html {
         scroll-behavior: smooth;
       }
 
-      /* =========================================================
-       ACHIEVEMENT REWARDS SECTION
-    ========================================================= */
-
-      .achievement-rewards-section {
-        width: 100%;
-        min-height: 584px;
-        padding: 65px 24px 61px;
-        background: #09090d;
-        border-top: 1px solid #9981038a;
+      body {
+        background: var(--achievement-bg);
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
       }
 
       /* =========================================================
-       SECTION HEADER
+       SECTION WRAPPER
     ========================================================= */
+      .achievement-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        padding: 50px 24px 60px;
+        background: var(--achievement-bg);
+        overflow: hidden;
+      }
 
-      .achievement-rewards-header {
+      /* Subtle ambient background lighting */
+      .achievement-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 45% at 15% 45%,
+            rgba(218, 175, 50, 0.025) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 55% 50% at 85% 55%,
+            rgba(0, 190, 255, 0.018) 0%,
+            transparent 70%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .achievement-section > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* =========================================================
+       HEADER
+    ========================================================= */
+      .achievement-header {
         width: 100%;
         max-width: 900px;
-
         margin: 0 auto;
-
         text-align: center;
       }
 
-      .achievement-rewards-title {
-        color: #f5f5f6;
-
-        font-size: 30px;
-        font-weight: 800;
-        line-height: 1.2;
-        letter-spacing: -0.8px;
+      /* ---------- Eyebrow ---------- */
+      .achievement-eyebrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        color: #8fa0b5;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
       }
 
-      .achievement-rewards-title-highlight {
+      .achievement-eyebrow-line {
+        display: inline-block;
+        width: 42px;
+        height: 1px;
         background: linear-gradient(
-          135deg,
-          #d4af37 0%,
-          #f5edcc 50%,
-          #ffc300 100%
+          90deg,
+          transparent,
+          rgba(218, 175, 50, 0.55),
+          transparent
         );
+      }
 
+      .achievement-eyebrow-text {
+        white-space: nowrap;
+      }
+
+      /* ---------- Title ---------- */
+      .achievement-title {
+        color: var(--achievement-white);
+        font-size: 52px;
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -2px;
+        margin-top: 12px;
+      }
+
+      .achievement-title-gold {
+        background: var(--achievement-gold-gradient);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent;
       }
 
-      .achievement-rewards-subtitle {
-        max-width: 620px;
-
-        margin: 9px auto 0;
-
-        color: #8da8c7;
-
-        font-size: 13.5px;
+      /* ---------- Subtitle ---------- */
+      .achievement-subtitle {
+        max-width: 780px;
+        margin: 14px auto 0;
+        color: var(--achievement-muted);
+        font-size: 16px;
         font-weight: 400;
-        line-height: 1.45;
+        line-height: 1.55;
       }
 
-      .achievement-rewards-subtitle strong {
-        color: #a8c0db;
+      .achievement-subtitle strong {
+        color: var(--achievement-white);
         font-weight: 700;
       }
 
       /* =========================================================
-       60 / 40 QUALIFICATION BOX
+       QUALIFICATION PANEL
     ========================================================= */
-
-      .achievement-qualification-box {
+      .achievement-rule-panel {
+        position: relative;
         width: 100%;
-        max-width: 768px;
-
-        margin: 41px auto 39px;
-
-        padding: 20px 20px 19px;
-
-        background: #121217;
-
-        border: 1px solid #624f18;
-        border-radius: 12px;
-      }
-
-      .achievement-qualification-heading {
+        max-width: 1200px;
+        min-height: 150px;
+        margin: 38px auto 0;
+        padding: 24px 32px;
+        background: var(--achievement-panel-bg);
+        border: 1px solid var(--achievement-panel-border);
+        border-radius: 18px;
+        box-shadow:
+          0 0 35px rgba(218, 175, 50, 0.06),
+          inset 0 0 35px rgba(218, 175, 50, 0.018);
         display: flex;
         align-items: center;
-        gap: 8px;
-
-        color: #e0b52f;
-
-        font-size: 13px;
-        font-weight: 800;
-        line-height: 1.3;
+        gap: 28px;
+        overflow: hidden;
       }
 
-      .achievement-qualification-icon {
-        width: 15px;
-        height: 15px;
-
+      /* --- Left icon --- */
+      .achievement-rule-icon {
         flex-shrink: 0;
-
-        color: #e0b52f;
+        width: 52px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #d8af3d;
+        border-radius: 50%;
+        color: var(--achievement-gold);
+        background: rgba(218, 175, 50, 0.06);
+        box-shadow: 0 0 18px rgba(218, 175, 50, 0.12);
       }
 
-      .achievement-qualification-text {
-        margin-top: 7px;
+      .achievement-rule-icon svg {
+        width: 26px;
+        height: 26px;
+      }
 
-        color: #e0e0e4;
+      /* --- Center content --- */
+      .achievement-rule-content {
+        flex: 1;
+        min-width: 0;
+      }
 
-        font-size: 12.5px;
-        font-weight: 500;
+      .achievement-rule-title {
+        color: #f0c43b;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.2px;
+      }
+
+      .achievement-rule-description {
+        margin-top: 6px;
+        color: #d5dce5;
+        font-size: 14px;
+        font-weight: 400;
         line-height: 1.55;
       }
 
-      /* =========================================================
-       REWARD GRID
-    ========================================================= */
+      /* --- Right growth graphic (SVG bars) --- */
+      .achievement-growth-graphic {
+        flex-shrink: 0;
+        width: 72px;
+        height: 72px;
+        opacity: 0.2;
+        color: var(--achievement-gold);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
 
-      .achievement-reward-grid {
+      .achievement-growth-graphic svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* =========================================================
+       TIER GRID
+    ========================================================= */
+      .achievement-tier-grid {
         width: 100%;
         max-width: 1216px;
-
-        margin: 0 auto;
-
+        margin: 30px auto 0;
         display: grid;
-
         grid-template-columns: repeat(7, minmax(0, 1fr));
-
-        gap: 12px;
+        gap: 14px;
       }
 
       /* =========================================================
-       REWARD CARD
+       TIER CARD
     ========================================================= */
-
-      .achievement-reward-card {
-        min-height: 88px;
-
-        padding: 14px 8px 12px;
-
+      .achievement-tier-card {
+        position: relative;
         display: flex;
         flex-direction: column;
+        min-height: 125px;
+        padding: 16px;
+        background: var(--achievement-card-gradient);
+        border: 1px solid var(--achievement-border);
+        border-radius: 14px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 0 rgba(218, 175, 50, 0);
+        overflow: hidden;
+      }
+
+      .achievement-tier-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(218, 175, 50, 0.55);
+        box-shadow:
+          0 8px 28px rgba(0, 0, 0, 0.55),
+          0 0 22px rgba(218, 175, 50, 0.07);
+      }
+
+      /* ---------- Icon ---------- */
+      .achievement-tier-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
         align-items: center;
         justify-content: center;
-
-        text-align: center;
-
-        background: #101016;
-
-        border: 1px solid #2b2c35;
-        border-radius: 11px;
-
-        transition:
-          transform 0.22s ease,
-          border-color 0.22s ease,
-          background 0.22s ease;
+        border-radius: 10px;
+        background: rgba(210, 170, 50, 0.06);
+        border: 1px solid rgba(210, 170, 50, 0.45);
+        color: var(--achievement-gold);
+        box-shadow: 0 0 14px rgba(218, 175, 50, 0.08);
+        flex-shrink: 0;
+        margin-bottom: 10px;
       }
 
-      .achievement-reward-card:hover {
-        transform: translateY(-3px);
-
-        border-color: #66541b;
-
-        background: #121219;
+      .achievement-tier-icon svg {
+        width: 20px;
+        height: 20px;
       }
 
-      /* =========================================================
-       REWARD TIER NAME
-    ========================================================= */
-
+      /* ---------- Text ---------- */
       .achievement-tier-name {
-        color: #f1f1f3;
-
-        font-size: 12px;
-        font-weight: 800;
+        color: var(--achievement-white);
+        font-size: 12.5px;
+        font-weight: 700;
         line-height: 1.25;
-
+        letter-spacing: -0.2px;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
-      /* =========================================================
-       BUSINESS VOLUME
-    ========================================================= */
-
-      .achievement-tier-volume {
-        margin-top: 4px;
-
+      .achievement-tier-bv {
+        margin-top: 3px;
         color: #9eb7d4;
-
         font-size: 11px;
         font-weight: 500;
-        line-height: 1.25;
-
+        line-height: 1.3;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-
-      /* =========================================================
-       CASH REWARD
-    ========================================================= */
 
       .achievement-tier-reward {
-        margin-top: 7px;
-
-        color: #00e6a2;
-
-        font-size: 12px;
+        margin-top: auto;
+        padding-top: 8px;
+        color: var(--achievement-teal);
+        font-size: 15px;
         font-weight: 800;
         line-height: 1.25;
+        letter-spacing: -0.3px;
+        text-shadow: 0 0 12px rgba(0, 226, 164, 0.18);
+        white-space: nowrap;
+      }
 
+      /* ---------- Arrow ---------- */
+      .achievement-tier-arrow {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 226, 164, 0.45);
+        background: rgba(0, 226, 164, 0.035);
+        color: #dde4ea;
+        font-size: 14px;
+        line-height: 1;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+
+      .achievement-tier-card:hover .achievement-tier-arrow {
+        border-color: rgba(0, 226, 164, 0.85);
+        transform: translateX(2px);
+      }
+
+      /* ---------- Legacy Founder special accent ---------- */
+      .achievement-tier-card--legacy {
+        border-color: rgba(218, 175, 50, 0.55);
+        box-shadow:
+          0 0 22px rgba(218, 175, 50, 0.06),
+          inset 0 0 22px rgba(218, 175, 50, 0.015);
+      }
+
+      .achievement-tier-card--legacy:hover {
+        border-color: rgba(218, 175, 50, 0.85);
+        box-shadow:
+          0 8px 28px rgba(0, 0, 0, 0.55),
+          0 0 32px rgba(218, 175, 50, 0.12);
+      }
+
+      /* =========================================================
+       FOOTER
+    ========================================================= */
+      .achievement-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        margin-top: 38px;
+        color: #718094;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+      }
+
+      .achievement-footer-line {
+        display: inline-block;
+        width: 55px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(218, 175, 50, 0.35),
+          transparent
+        );
+      }
+
+      .achievement-footer-text {
         white-space: nowrap;
       }
 
       /* =========================================================
-       TABLET
+       RESPONSIVE
     ========================================================= */
-
-      @media (max-width: 1100px) {
-        .achievement-reward-grid {
+      @media (max-width: 1200px) {
+        .achievement-tier-grid {
           grid-template-columns: repeat(4, minmax(0, 1fr));
           max-width: 900px;
         }
       }
 
-      /* =========================================================
-       MOBILE
-    ========================================================= */
+      @media (max-width: 900px) {
+        .achievement-title {
+          font-size: 40px;
+          letter-spacing: -1.5px;
+        }
 
-      @media (max-width: 700px) {
-        .achievement-rewards-section {
+        .achievement-subtitle {
+          font-size: 15px;
+        }
+
+        .achievement-rule-panel {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+          padding: 22px 24px;
           min-height: auto;
-          padding: 55px 16px;
         }
 
-        .achievement-rewards-title {
-          font-size: 27px;
+        .achievement-rule-icon {
+          width: 46px;
+          height: 46px;
         }
 
-        .achievement-rewards-subtitle {
-          font-size: 13px;
+        .achievement-rule-icon svg {
+          width: 22px;
+          height: 22px;
         }
 
-        .achievement-qualification-box {
-          margin-top: 32px;
-          margin-bottom: 30px;
-
-          padding: 18px 17px;
-        }
-
-        .achievement-qualification-text {
-          font-size: 12px;
-        }
-
-        .achievement-reward-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 10px;
-
-          max-width: 500px;
-        }
-
-        .achievement-reward-card {
-          min-height: 88px;
+        .achievement-growth-graphic {
+          display: none;
         }
       }
 
-      @media (max-width: 420px) {
-        .achievement-rewards-section {
-          padding-left: 12px;
-          padding-right: 12px;
+      @media (max-width: 767px) {
+        .achievement-section {
+          padding: 40px 16px 48px;
         }
 
-        .achievement-rewards-title {
-          font-size: 24px;
+        .achievement-title {
+          font-size: 32px;
+          letter-spacing: -1px;
         }
 
-        .achievement-rewards-subtitle {
+        .achievement-subtitle {
+          font-size: 14px;
+          max-width: 100%;
+        }
+
+        .achievement-rule-panel {
+          padding: 18px 18px;
+          border-radius: 14px;
+        }
+
+        .achievement-rule-title {
+          font-size: 15px;
+        }
+
+        .achievement-rule-description {
+          font-size: 13px;
+        }
+
+        .achievement-tier-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+          max-width: 560px;
+        }
+
+        .achievement-tier-card {
+          min-height: 120px;
+          padding: 14px;
+        }
+
+        .achievement-tier-name {
           font-size: 12px;
         }
 
-        .achievement-reward-grid {
+        .achievement-tier-bv {
+          font-size: 10.5px;
+        }
+
+        .achievement-tier-reward {
+          font-size: 14px;
+        }
+
+        .achievement-tier-arrow {
+          width: 24px;
+          height: 24px;
+          font-size: 12px;
+          bottom: 8px;
+          right: 8px;
+        }
+
+        .achievement-footer {
+          font-size: 9px;
+          letter-spacing: 4px;
+          gap: 12px;
+        }
+
+        .achievement-footer-line {
+          width: 30px;
+        }
+
+        .achievement-eyebrow {
+          font-size: 10px;
+          letter-spacing: 4px;
+        }
+
+        .achievement-eyebrow-line {
+          width: 28px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .achievement-section {
+          padding: 32px 12px 40px;
+        }
+
+        .achievement-title {
+          font-size: 28px;
+          letter-spacing: -0.8px;
+        }
+
+        .achievement-subtitle {
+          font-size: 13px;
+        }
+
+        .achievement-tier-grid {
           grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+
+        .achievement-tier-card {
+          min-height: 110px;
+          padding: 12px;
+        }
+
+        .achievement-tier-icon {
+          width: 34px;
+          height: 34px;
+          margin-bottom: 8px;
+        }
+
+        .achievement-tier-icon svg {
+          width: 16px;
+          height: 16px;
         }
 
         .achievement-tier-name {
           font-size: 11px;
         }
 
-        .achievement-tier-volume {
+        .achievement-tier-bv {
           font-size: 10px;
         }
 
         .achievement-tier-reward {
+          font-size: 13px;
+        }
+
+        .achievement-tier-arrow {
+          width: 22px;
+          height: 22px;
           font-size: 11px;
+          bottom: 6px;
+          right: 6px;
+        }
+
+        .achievement-rule-panel {
+          padding: 16px 14px;
+        }
+
+        .achievement-rule-title {
+          font-size: 14px;
+        }
+
+        .achievement-rule-description {
+          font-size: 12px;
+        }
+
+        .achievement-footer {
+          font-size: 8px;
+          letter-spacing: 3px;
+          gap: 8px;
+        }
+
+        .achievement-footer-line {
+          width: 20px;
         }
       }
     </style>
   </head>
-
   <body>
-    <!-- =======================================================
-       FIXED ACHIEVEMENT CASH REWARDS
-  ======================================================== -->
+    <section class="achievement-section">
+      <!-- =====================================================
+         HEADER
+    ====================================================== -->
+      <header class="achievement-header">
+        <!-- Eyebrow -->
+        <div class="achievement-eyebrow">
+          <span class="achievement-eyebrow-line"></span>
+          <span class="achievement-eyebrow-text">ACHIEVE · GROW · EARN</span>
+          <span class="achievement-eyebrow-line"></span>
+        </div>
 
-    <section class="achievement-rewards-section">
-      <!-- Section Header -->
-      <header class="achievement-rewards-header">
-        <h1 class="achievement-rewards-title">
+        <!-- Title -->
+        <h1 class="achievement-title">
           Fixed Achievement
-          <span class="achievement-rewards-title-highlight">
-            Cash Rewards
-          </span>
+          <span class="achievement-title-gold">Cash Rewards</span>
         </h1>
 
-        <p class="achievement-rewards-subtitle">
-          Earn fixed one-time cash rewards credited straight to your Profit
-          wallet. Governed strictly by the
-          <strong>60/40 Business Volume (BV) rule.</strong>
+        <!-- Subtitle -->
+        <p class="achievement-subtitle">
+          Unlock fixed, one-time cash rewards credited directly to your Profit
+          wallet. All rewards are governed by the
+          <strong>60/40 Business Volume (BV) qualification rule.</strong>
         </p>
       </header>
 
       <!-- =====================================================
-         60 / 40 BV QUALIFICATION RULE
+         QUALIFICATION PANEL
     ====================================================== -->
-
-      <div class="achievement-qualification-box">
-        <div class="achievement-qualification-heading">
+      <div class="achievement-rule-panel">
+        <!-- Left icon -->
+        <div class="achievement-rule-icon">
           <svg
-            class="achievement-qualification-icon"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <circle
+            <ellipse
               cx="12"
-              cy="12"
-              r="9.5"
+              cy="6"
+              rx="7"
+              ry="2.8"
               stroke="currentColor"
-              stroke-width="1.7"
+              stroke-width="1.5"
             />
-
             <path
-              d="M8.5 12.2L10.7 14.4L15.6 9.6"
+              d="M5 6v5c0 1.55 3.13 2.8 7 2.8s7-1.25 7-2.8V6"
               stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+            <path
+              d="M5 11v5c0 1.55 3.13 2.8 7 2.8s7-1.25 7-2.8v-5"
+              stroke="currentColor"
+              stroke-width="1.5"
             />
           </svg>
-
-          <span> The 60/40 BV Qualification Rule </span>
         </div>
 
-        <p class="achievement-qualification-text">
-          To qualify for any tier: Maximum 60% of required BV can come from your
-          strongest direct referral leg; the remaining 40% minimum must come
-          from all other referral legs combined. Rewards pay the full fixed cash
-          amount upon meeting BV criteria.
-        </p>
+        <!-- Center content -->
+        <div class="achievement-rule-content">
+          <div class="achievement-rule-title">
+            The 60/40 BV Qualification Rule
+          </div>
+          <p class="achievement-rule-description">
+            To qualify for any achievement tier, a maximum of 60% of the
+            required BV may come from your strongest direct referral leg, while
+            at least 40% must be generated collectively from all other referral
+            legs. Once the required BV criteria are met, the applicable fixed
+            cash reward is paid in full.
+          </p>
+        </div>
+
+        <!-- Right growth graphic -->
+        <div class="achievement-growth-graphic" aria-hidden="true">
+          <svg
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="6"
+              y="44"
+              width="8"
+              height="14"
+              rx="2"
+              fill="currentColor"
+              opacity="0.6"
+            />
+            <rect
+              x="18"
+              y="36"
+              width="8"
+              height="22"
+              rx="2"
+              fill="currentColor"
+              opacity="0.7"
+            />
+            <rect
+              x="30"
+              y="26"
+              width="8"
+              height="32"
+              rx="2"
+              fill="currentColor"
+              opacity="0.85"
+            />
+            <rect
+              x="42"
+              y="14"
+              width="8"
+              height="44"
+              rx="2"
+              fill="currentColor"
+            />
+            <path
+              d="M46 8L58 8L58 20"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              opacity="0.9"
+            />
+            <path
+              d="M58 8L44 22"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              opacity="0.9"
+            />
+          </svg>
+        </div>
       </div>
 
       <!-- =====================================================
-         ACHIEVEMENT REWARD GRID
+         TIER GRID (14 cards, 7 per row)
     ====================================================== -->
-
-      <div class="achievement-reward-grid">
+      <div class="achievement-tier-grid">
         <!-- 1. Pioneer -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Pioneer </span>
-
-          <span class="achievement-tier-volume"> $1,000 BV </span>
-
-          <span class="achievement-tier-reward"> $20 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+              />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Pioneer</div>
+          <div class="achievement-tier-bv">$1,000 BV</div>
+          <div class="achievement-tier-reward">$20 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 2. Builder -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Builder </span>
-
-          <span class="achievement-tier-volume"> $5,000 BV </span>
-
-          <span class="achievement-tier-reward"> $100 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 18L6 6L12 12L18 6L21 18H3Z" />
+              <path d="M3 18H21" />
+              <path d="M12 12V18" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Builder</div>
+          <div class="achievement-tier-bv">$5,000 BV</div>
+          <div class="achievement-tier-reward">$100 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 3. Achiever -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Achiever </span>
-
-          <span class="achievement-tier-volume"> $7,500 BV </span>
-
-          <span class="achievement-tier-reward"> $140 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="14" width="4" height="6" rx="1" />
+              <rect x="10" y="10" width="4" height="10" rx="1" />
+              <rect x="16" y="6" width="4" height="14" rx="1" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Achiever</div>
+          <div class="achievement-tier-bv">$7,500 BV</div>
+          <div class="achievement-tier-reward">$140 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 4. Influencer -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Influencer </span>
-
-          <span class="achievement-tier-volume"> $10,000 BV </span>
-
-          <span class="achievement-tier-reward"> $200 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Influencer</div>
+          <div class="achievement-tier-bv">$10,000 BV</div>
+          <div class="achievement-tier-reward">$200 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 5. Mentor -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Mentor </span>
-
-          <span class="achievement-tier-volume"> $15,000 BV </span>
-
-          <span class="achievement-tier-reward"> $300 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="9" cy="8" r="3" />
+              <circle cx="15" cy="8" r="3" />
+              <path d="M3 20C3 16.5 5.5 14 9 14C10.5 14 12 14.5 13 15.5" />
+              <path d="M15 14C18.5 14 21 16.5 21 20" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Mentor</div>
+          <div class="achievement-tier-bv">$15,000 BV</div>
+          <div class="achievement-tier-reward">$300 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 6. Captain -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Captain </span>
-
-          <span class="achievement-tier-volume"> $20,000 BV </span>
-
-          <span class="achievement-tier-reward"> $400 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="9" r="6" />
+              <path d="M12 3V1" />
+              <path d="M12 15V17" />
+              <path d="M8 21L12 17L16 21" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Captain</div>
+          <div class="achievement-tier-bv">$20,000 BV</div>
+          <div class="achievement-tier-reward">$400 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 7. Champion -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Champion </span>
-
-          <span class="achievement-tier-volume"> $25,000 BV </span>
-
-          <span class="achievement-tier-reward"> $500 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 4H18V9C18 13.5 15 17 12 17C9 17 6 13.5 6 9V4Z" />
+              <path d="M6 4H3V6C3 8.5 4.5 10 6 10" />
+              <path d="M18 4H21V6C21 8.5 19.5 10 18 10" />
+              <path d="M12 17V21" />
+              <path d="M8 21H16" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Champion</div>
+          <div class="achievement-tier-bv">$25,000 BV</div>
+          <div class="achievement-tier-reward">$500 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 8. Elite -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Elite </span>
-
-          <span class="achievement-tier-volume"> $35,000 BV </span>
-
-          <span class="achievement-tier-reward"> $700 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2L22 12L12 22L2 12L12 2Z" />
+              <path d="M12 6L18 12L12 18L6 12L12 6Z" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Elite</div>
+          <div class="achievement-tier-bv">$35,000 BV</div>
+          <div class="achievement-tier-reward">$700 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 9. Innovator -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Innovator </span>
-
-          <span class="achievement-tier-volume"> $50,000 BV </span>
-
-          <span class="achievement-tier-reward"> $1,000 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2V6" />
+              <path d="M12 18V22" />
+              <path d="M2 12H6" />
+              <path d="M18 12H22" />
+              <path d="M5 5L7.5 7.5" />
+              <path d="M16.5 16.5L19 19" />
+              <path d="M5 19L7.5 16.5" />
+              <path d="M16.5 7.5L19 5" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Innovator</div>
+          <div class="achievement-tier-bv">$50,000 BV</div>
+          <div class="achievement-tier-reward">$1,000 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 10. Titan -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Titan </span>
-
-          <span class="achievement-tier-volume"> $100,000 BV </span>
-
-          <span class="achievement-tier-reward"> $2,000 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2L15 9H9L12 2Z" />
+              <path d="M6 9L9 22H15L18 9H6Z" />
+              <circle cx="12" cy="14" r="2" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Titan</div>
+          <div class="achievement-tier-bv">$100,000 BV</div>
+          <div class="achievement-tier-reward">$2,000 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 11. Silver Elite -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Silver Elite </span>
-
-          <span class="achievement-tier-volume"> $250,000 BV </span>
-
-          <span class="achievement-tier-reward"> $5,000 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+              />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Silver Elite</div>
+          <div class="achievement-tier-bv">$250,000 BV</div>
+          <div class="achievement-tier-reward">$5,000 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 12. Platinum Elite -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Platinum Elite </span>
-
-          <span class="achievement-tier-volume"> $500,000 BV </span>
-
-          <span class="achievement-tier-reward"> $10,000 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 18L6 6L12 12L18 6L21 18H3Z" />
+              <path d="M3 18H21" />
+              <path d="M12 12V18" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Platinum Elite</div>
+          <div class="achievement-tier-bv">$500,000 BV</div>
+          <div class="achievement-tier-reward">$10,000 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 13. Ruby Elite -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Ruby Elite </span>
-
-          <span class="achievement-tier-volume"> $1,000,000 BV </span>
-
-          <span class="achievement-tier-reward"> $20,000 USDT </span>
+        <article class="achievement-tier-card">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2L22 12L12 22L2 12L12 2Z" />
+              <path d="M12 6L18 12L12 18L6 12L12 6Z" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Ruby Elite</div>
+          <div class="achievement-tier-bv">$1,000,000 BV</div>
+          <div class="achievement-tier-reward">$20,000 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
 
         <!-- 14. Legacy Founder -->
-        <article class="achievement-reward-card">
-          <span class="achievement-tier-name"> Legacy Founder </span>
-
-          <span class="achievement-tier-volume"> $100,000,000 BV </span>
-
-          <span class="achievement-tier-reward"> $4,000,000 USDT </span>
+        <article class="achievement-tier-card achievement-tier-card--legacy">
+          <div class="achievement-tier-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12 2L15 9H22L16.5 13.5L18.5 21L12 16.5L5.5 21L7.5 13.5L2 9H9L12 2Z"
+              />
+              <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.3" />
+            </svg>
+          </div>
+          <div class="achievement-tier-name">Legacy Founder</div>
+          <div class="achievement-tier-bv">$100,000,000 BV</div>
+          <div class="achievement-tier-reward">$4,000,000 USDT</div>
+          <div class="achievement-tier-arrow">›</div>
         </article>
+      </div>
+
+      <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+      <div class="achievement-footer">
+        <span class="achievement-footer-line"></span>
+        <span class="achievement-footer-text"
+          >PEOPLE · OPPORTUNITY · LONG-TERM GROWTH</span
+        >
+        <span class="achievement-footer-line"></span>
       </div>
     </section>
 
-    <!-- =======================================================
-       JAVASCRIPT
-  ======================================================== -->
-
+    <!-- =====================================================
+       VANILLA JS (optional, non-critical)
+  ====================================================== -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const rewardsSection = document.querySelector(
-          ".achievement-rewards-section",
-        );
-
-        const rewardCards = document.querySelectorAll(
-          ".achievement-reward-card",
-        );
-
-        if (!rewardsSection) return;
-
-        /* Subtle section entrance */
-
-        rewardsSection.style.opacity = "0";
-        rewardsSection.style.transform = "translateY(8px)";
-        rewardsSection.style.transition =
-          "opacity 0.5s ease, transform 0.5s ease";
-
-        requestAnimationFrame(() => {
-          rewardsSection.style.opacity = "1";
-          rewardsSection.style.transform = "translateY(0)";
-        });
-
-        /* Card interaction */
-
-        rewardCards.forEach((card) => {
-          card.addEventListener("mouseenter", () => {
-            card.style.transform = "translateY(-3px)";
+        // Subtle entrance animation for the section
+        const section = document.querySelector(".achievement-section");
+        if (section) {
+          section.style.opacity = "0";
+          section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          section.style.transform = "translateY(10px)";
+          requestAnimationFrame(() => {
+            section.style.opacity = "1";
+            section.style.transform = "translateY(0)";
           });
-
-          card.addEventListener("mouseleave", () => {
-            card.style.transform = "translateY(0)";
-          });
-        });
+        }
       });
     </script>
   </body>
@@ -7664,10 +8015,7 @@
 
           <div class="solvex-footer-brand">
             <a href="#" class="solvex-footer-logo" aria-label="SolveX Home">
-              <img
-                src="https://worldofforex.uk/wp-content/uploads/2026/09/logo-1.png"
-                alt="SolveX"
-              />
+              <img src="Photos/logo-1.png" alt="SolveX" />
             </a>
 
             <p class="solvex-footer-description">

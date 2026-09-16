@@ -433,3 +433,533 @@
     </script>
   </body>
 </html>
+
+<!-- ----- income Cap ---- -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Maximum Income Cap</title>
+
+    <!-- Inter -->
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+    <style>
+      /* =========================================================
+       GLOBAL
+    ========================================================= */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* body {
+        min-height: 100vh;
+        background: #09090d;
+        color: #ffffff;
+        font-family: "Inter", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      } */
+
+      /* =========================================================
+       MAXIMUM INCOME CAP SECTION
+    ========================================================= */
+
+      .income-cap-section {
+        width: 100%;
+        min-height: 748px;
+
+        padding: 113px 24px 110px;
+
+        background: #09090d;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* =========================================================
+       SECTION HEADER
+    ========================================================= */
+
+      .income-cap-header {
+        width: 100%;
+        max-width: 1250px;
+
+        margin: 0 auto 41px;
+
+        text-align: center;
+      }
+
+      .income-cap-title {
+        margin: 0;
+
+        color: #f7f7f8;
+
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.9px;
+      }
+
+      .income-cap-title-highlight {
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #f5edcc 50%,
+          #ffc300 100%
+        );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      .income-cap-description {
+        max-width: 1240px;
+
+        margin: 11px auto 0;
+
+        color: #8ca7c6;
+
+        font-size: 13.5px;
+        font-weight: 400;
+        line-height: 1.45;
+        letter-spacing: 0;
+
+        text-align: center;
+      }
+
+      /* =========================================================
+       CAP CARDS WRAPPER
+    ========================================================= */
+
+      .income-cap-cards {
+        width: 100%;
+        max-width: 768px;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 16px;
+
+        margin: 0 auto;
+      }
+
+      /* =========================================================
+       INDIVIDUAL CAP CARD
+    ========================================================= */
+
+      .income-cap-card {
+        min-height: 401px;
+
+        padding: 31px 32px 32px;
+
+        background: #101016;
+
+        border: 1px solid #705919;
+        border-radius: 15px;
+
+        box-shadow: 0 18px 28px rgba(0, 0, 0, 0.15);
+
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .income-cap-card:hover {
+        transform: translateY(-3px);
+
+        border-color: #927321;
+
+        box-shadow: 0 22px 35px rgba(0, 0, 0, 0.24);
+      }
+
+      /* =========================================================
+       CARD TOP ROW
+    ========================================================= */
+
+      .income-cap-card-header {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 14px;
+      }
+
+      .income-cap-card-label {
+        color: #d9b42e;
+
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1.2;
+
+        letter-spacing: 0.1px;
+        text-transform: uppercase;
+      }
+
+      .income-cap-badge {
+        flex-shrink: 0;
+
+        min-width: 73px;
+        height: 25px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0 12px;
+
+        border-radius: 999px;
+
+        background: #d8b12e;
+
+        color: #101016;
+
+        font-size: 11px;
+        font-weight: 800;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      /* =========================================================
+       CARD TITLE
+    ========================================================= */
+
+      .income-cap-card-title {
+        margin-top: 18px;
+
+        color: #f7f7f8;
+
+        font-size: 25px;
+        font-weight: 800;
+        line-height: 1.2;
+
+        letter-spacing: -0.55px;
+      }
+
+      /* =========================================================
+       CARD DESCRIPTION
+    ========================================================= */
+
+      .income-cap-card-description {
+        margin-top: 11px;
+
+        color: #c6c6ce;
+
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.6;
+
+        letter-spacing: -0.1px;
+      }
+
+      /* =========================================================
+       EXAMPLE BOXES
+    ========================================================= */
+
+      .income-cap-examples {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 16px;
+
+        margin-top: 25px;
+      }
+
+      .income-cap-example {
+        min-height: 94px;
+
+        padding: 15px 15px 13px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        background: #0c0c12;
+
+        border: 1px solid #272832;
+        border-radius: 11px;
+      }
+
+      .income-cap-example-investment {
+        color: #f0f0f2;
+
+        font-size: 12.5px;
+        font-weight: 800;
+        line-height: 1.35;
+      }
+
+      .income-cap-example-result {
+        margin-top: 3px;
+
+        color: #d9b52e;
+
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.45;
+      }
+
+      /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+      @media (max-width: 850px) {
+        .income-cap-section {
+          min-height: auto;
+          padding: 80px 20px;
+        }
+
+        .income-cap-cards {
+          max-width: 768px;
+        }
+
+        .income-cap-title {
+          font-size: 28px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .income-cap-section {
+          padding: 65px 16px;
+        }
+
+        .income-cap-header {
+          margin-bottom: 32px;
+        }
+
+        .income-cap-title {
+          font-size: 26px;
+        }
+
+        .income-cap-description {
+          font-size: 13px;
+        }
+
+        .income-cap-cards {
+          grid-template-columns: 1fr;
+          max-width: 450px;
+        }
+
+        .income-cap-card {
+          min-height: auto;
+          padding: 27px 25px 28px;
+        }
+      }
+
+      @media (max-width: 430px) {
+        .income-cap-section {
+          padding: 55px 12px;
+        }
+
+        .income-cap-title {
+          font-size: 24px;
+        }
+
+        .income-cap-description {
+          font-size: 12.5px;
+        }
+
+        .income-cap-card {
+          padding: 24px 20px 25px;
+          border-radius: 13px;
+        }
+
+        .income-cap-card-label {
+          font-size: 10.5px;
+        }
+
+        .income-cap-badge {
+          min-width: 68px;
+          height: 24px;
+          font-size: 10px;
+        }
+
+        .income-cap-card-title {
+          font-size: 22px;
+        }
+
+        .income-cap-card-description {
+          font-size: 13px;
+        }
+
+        .income-cap-examples {
+          gap: 10px;
+        }
+
+        .income-cap-example {
+          padding: 13px 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================================================
+       MAXIMUM INCOME CAP
+  ========================================================= -->
+
+    <section class="income-cap-section">
+      <!-- Header -->
+      <header class="income-cap-header">
+        <h1 class="income-cap-title">
+          Maximum
+          <span class="income-cap-title-highlight"> Income Cap </span>
+        </h1>
+
+        <p class="income-cap-description">
+          Cap applies to the sum of ROI + Level Income (totalEarned). Investors
+          are capped at 3× their investment, while Networkers have a 5× cap.
+          Achievement rewards do not count toward cap.
+        </p>
+      </header>
+
+      <!-- Cards -->
+      <div class="income-cap-cards">
+        <!-- =====================================================
+           INVESTOR CARD
+      ====================================================== -->
+
+        <article class="income-cap-card">
+          <div class="income-cap-card-header">
+            <span class="income-cap-card-label"> Investor Earning Limit </span>
+
+            <span class="income-cap-badge"> 3X Cap </span>
+          </div>
+
+          <h2 class="income-cap-card-title">300% Total Return Cap</h2>
+
+          <p class="income-cap-card-description">
+            Investor accounts earn up to 300% (3 × Total Invested) in cumulative
+            ROI earnings. Once the 3X threshold is reached, principal can be
+            withdrawn or reinvested to continue earning.
+          </p>
+
+          <div class="income-cap-examples">
+            <div class="income-cap-example">
+              <span class="income-cap-example-investment">
+                $1,000 Investment
+              </span>
+
+              <span class="income-cap-example-result">
+                → $3,000<br />
+                Maximum Cap
+              </span>
+            </div>
+
+            <div class="income-cap-example">
+              <span class="income-cap-example-investment">
+                $5,000 Investment
+              </span>
+
+              <span class="income-cap-example-result">
+                → $15,000<br />
+                Maximum Cap
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- =====================================================
+           NETWORKER CARD
+      ====================================================== -->
+
+        <article class="income-cap-card">
+          <div class="income-cap-card-header">
+            <span class="income-cap-card-label"> Networker Earning Limit </span>
+
+            <span class="income-cap-badge"> 5X Cap </span>
+          </div>
+
+          <h2 class="income-cap-card-title">500% Total Return Cap</h2>
+
+          <p class="income-cap-card-description">
+            Networker/Affiliate accounts earn up to 500% (5 × Total Invested) in
+            cumulative earnings across ROI distributions and referral level
+            commissions. Once the 5X threshold is reached, simply reinvest or
+            add new capital to continue earning.
+          </p>
+
+          <div class="income-cap-examples">
+            <div class="income-cap-example">
+              <span class="income-cap-example-investment">
+                $1,000 Investment
+              </span>
+
+              <span class="income-cap-example-result">
+                → $5,000<br />
+                Maximum Cap
+              </span>
+            </div>
+
+            <div class="income-cap-example">
+              <span class="income-cap-example-investment">
+                $5,000 Investment
+              </span>
+
+              <span class="income-cap-example-result">
+                → $25,000<br />
+                Maximum Cap
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const incomeCapSection = document.querySelector(".income-cap-section");
+
+        const incomeCapCards = document.querySelectorAll(".income-cap-card");
+
+        if (!incomeCapSection) return;
+
+        /* Initial state */
+
+        incomeCapSection.style.opacity = "0";
+        incomeCapSection.style.transform = "translateY(8px)";
+        incomeCapSection.style.transition =
+          "opacity 0.5s ease, transform 0.5s ease";
+
+        /* Reveal */
+
+        requestAnimationFrame(() => {
+          incomeCapSection.style.opacity = "1";
+          incomeCapSection.style.transform = "translateY(0)";
+        });
+
+        /* Card interaction */
+
+        incomeCapCards.forEach((card) => {
+          card.addEventListener("mouseenter", () => {
+            card.style.transform = "translateY(-3px)";
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "translateY(0)";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
